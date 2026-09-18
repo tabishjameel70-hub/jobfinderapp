@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Tracker Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#F9F8F5] min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main Container -->
+    <div class="bg-white rounded-[2rem] shadow-sm w-full max-w-4xl flex flex-col lg:flex-row p-3 gap-3 border border-stone-100">
+        
+        <!-- Left Column: Form -->
+        <div class="w-full lg:w-1/2 flex flex-col justify-center py-8 px-6 sm:px-10">
+            
+            <!-- Icon -->
+            <div class="mb-6 w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+            </div>
+            
+            <!-- Headers -->
+            <h1 class="text-3xl font-bold text-stone-900 mb-2 tracking-tight">Get started</h1>
+            <p class="text-stone-500 text-sm mb-8">Create an account to track your full-stack applications.</p>
+
+            <!-- Form Fields -->
+            <form action="/signup" method="POST" class="w-full space-y-4">
+                
+                <div>
+                    <label for="name" class="block text-sm font-semibold text-stone-800 mb-1.5">Name</label>
+                    <input type="text" id="username" name="username" required placeholder="John Doe" class="w-full border-2 border-stone-100 rounded-xl px-3 py-2.5 outline-none focus:border-orange-200 focus:ring-4 focus:ring-orange-50/50 placeholder-stone-400 text-sm transition-all" />
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-semibold text-stone-800 mb-1.5">Email address</label>
+                    <input type="email" id="email" name="email" required placeholder="john@example.com" class="w-full border-2 border-stone-100 rounded-xl px-3 py-2.5 outline-none focus:border-orange-200 focus:ring-4 focus:ring-orange-50/50 placeholder-stone-400 text-sm transition-all" />
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-semibold text-stone-800 mb-1.5">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••" class="w-full border-2 border-stone-100 rounded-xl px-3 py-2.5 outline-none focus:border-orange-200 focus:ring-4 focus:ring-orange-50/50 placeholder-stone-400 text-sm transition-all" />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-stone-900 hover:bg-stone-800 text-white font-semibold rounded-xl py-3 transition-colors shadow-lg shadow-stone-900/10 text-sm">
+                        Create account
+                    </button>
+                </div>
+                
+                <!-- Login Link -->
+                <div class="pt-2 text-center text-xs text-stone-500 font-medium">
+                    Already have an account? 
+                    <a href="/login" class="text-orange-600 hover:text-orange-700 font-semibold underline underline-offset-2 transition-colors">Log in</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right Column: Warm Illustration Panel -->
+        <div class="hidden lg:block lg:w-1/2 relative bg-[#F4EFE6] rounded-[1.5rem] overflow-hidden p-5">
+            
+            <!-- Background Image (Fixed blend bug using simple opacity) -->
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Workspace" 
+                 class="absolute inset-0 w-full h-full object-cover opacity-40" />
+            
+            <!-- Overlay Gradient for warmth -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#DBCBAF]/80 via-[#F4EFE6]/40 to-transparent"></div>
+
+            <!-- Overlay Card -->
+            <div class="absolute bottom-5 right-5 left-5 bg-white/95 backdrop-blur-md rounded-2xl p-6 shadow-xl shadow-stone-900/5 z-10">
+                <div class="flex justify-between items-start mb-3">
+                    <h2 class="text-xl font-bold text-stone-900 leading-tight">
+                        Organize your <br>tech career.
+                    </h2>
+                    <div class="bg-orange-100 text-orange-600 w-8 h-8 flex items-center justify-center rounded-lg">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="flex items-end justify-between">
+                    <p class="text-xs text-stone-500 max-w-[80%] font-medium leading-relaxed">
+                        Track interviews, manage offers, and map out your journey from frontend to full-stack.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

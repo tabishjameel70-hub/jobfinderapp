@@ -1,0 +1,1116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Your Roles</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#f7f3ed] text-[#292524]">
+
+    <!-- Main Container -->
+    <div class="max-w-5xl mx-auto px-5 py-8 sm:py-12">
+
+        <!-- Back -->
+        <a href="/signup"
+            class="inline-flex items-center gap-2 text-sm font-medium text-stone-500 hover:text-[#9a5b45] transition">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.8"
+                stroke="currentColor"
+                class="w-4 h-4">
+
+                <path stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+
+            </svg>
+
+            Back
+
+        </a>
+
+
+        <!-- Header -->
+        <div class="text-center mt-10 mb-10">
+
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full
+                        bg-[#ead9cf] text-[#8f5845]
+                        text-xs font-semibold tracking-wide mb-5">
+
+                <span class="w-1.5 h-1.5 rounded-full bg-[#b86f55]"></span>
+
+                PERSONALIZE YOUR JOB SEARCH
+
+            </div>
+
+
+            <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-[#29231f]">
+                What roles interest you?
+            </h1>
+
+
+            <p class="max-w-xl mx-auto mt-4 text-stone-500 leading-relaxed">
+                Select the technical roles you're interested in.
+                We'll use your choices to personalize your job recommendations.
+            </p>
+
+        </div>
+
+
+        <!-- Search -->
+        <div class="relative mb-7">
+
+            <input type="text"
+                id="search"
+                placeholder="Search job roles..."
+                class="w-full h-14 pl-12 pr-5 rounded-2xl
+                       bg-white
+                       border border-[#e7ddd4]
+                       text-sm text-stone-800
+                       placeholder:text-stone-400
+                       outline-none
+                       shadow-sm
+                       focus:border-[#b86f55]
+                       focus:ring-4 focus:ring-[#b86f55]/10
+                       transition">
+
+
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.8"
+                    stroke="currentColor"
+                    class="w-5 h-5">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+
+                </svg>
+
+            </span>
+
+        </div>
+
+
+        <!-- Selected Counter -->
+        <div class="flex items-center justify-between mb-5 px-1">
+
+            <p class="text-sm text-stone-500">
+
+                <span id="count"
+                    class="font-semibold text-[#9a5b45]">
+                    0
+                </span>
+
+                roles selected
+
+            </p>
+
+
+            <button type="button"
+                onclick="clearAll()"
+                class="text-sm font-medium text-stone-400
+                       hover:text-[#9a5b45]
+                       transition">
+
+                Clear all
+
+            </button>
+
+        </div>
+
+
+        <!-- Roles -->
+        <form action="/passions" method="POST">
+
+            <div id="passionList"
+                class="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+
+                <!-- AI Ethicist -->
+                <label class="passion group">
+
+                    <div class="role-content">
+
+                        <div class="role-icon">
+                            AI
+                        </div>
+
+                        <div class="min-w-0">
+                            <h3>AI Ethicist</h3>
+                        </div>
+
+                    </div>
+
+                    <input type="checkbox" name="passion" value="AI Ethicist"
+                        class="passionCheck">
+
+                </label>
+
+
+                <!-- AI Research Scientist -->
+                <label class="passion group">
+                    <div class="role-content">
+                        <div class="role-icon">AI</div>
+                        <div class="min-w-0">
+                            <h3>AI Research Scientist</h3>
+                        </div>
+                    </div>
+                    <input type="checkbox" name="passion" value="AI Research Scientist"
+                        class="passionCheck">
+                </label>
+
+
+                <label class="passion group">
+                    <div class="role-content">
+                        <div class="role-icon">API</div>
+                        <div class="min-w-0"><h3>API Engineer</h3></div>
+                    </div>
+                    <input type="checkbox" name="passion" value="API Engineer" class="passionCheck">
+                </label>
+
+
+                <label class="passion group">
+                    <div class="role-content">
+                        <div class="role-icon">AR</div>
+                        <div class="min-w-0"><h3>AR/VR Developer (Augmented/Virtual Reality)</h3></div>
+                    </div>
+                    <input type="checkbox" name="passion" value="AR/VR Developer (Augmented/Virtual Reality)" class="passionCheck">
+                </label>
+
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IC</div><div><h3>ASIC Design Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="ASIC Design Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">AC</div><div><h3>Agile Coach</h3></div></div>
+                    <input type="checkbox" name="passion" value="Agile Coach" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">AN</div><div><h3>Android Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Android Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">AS</div><div><h3>Application Security Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Application Security Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IT</div><div><h3>Application Support Analyst</h3></div></div>
+                    <input type="checkbox" name="passion" value="Application Support Analyst" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">AU</div><div><h3>Automation Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Automation Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">QA</div><div><h3>Automation Test Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Automation Test Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">BI</div><div><h3>BI Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="BI Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">BE</div><div><h3>Backend Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Backend Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">BE</div><div><h3>Backend Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Backend Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DB</div><div><h3>Big Data Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Big Data Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">BIO</div><div><h3>Bioinformatics Scientist</h3></div></div>
+                    <input type="checkbox" name="passion" value="Bioinformatics Scientist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">BC</div><div><h3>Blockchain Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Blockchain Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">BI</div><div><h3>Business Intelligence Analyst</h3></div></div>
+                    <input type="checkbox" name="passion" value="Business Intelligence Analyst" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">BA</div><div><h3>Business Systems Analyst</h3></div></div>
+                    <input type="checkbox" name="passion" value="Business Systems Analyst" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">C++</div><div><h3>C++ Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="C++ Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CO</div><div><h3>COBOL Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="COBOL Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CRM</div><div><h3>CRM Administrator</h3></div></div>
+                    <input type="checkbox" name="passion" value="CRM Administrator" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CIO</div><div><h3>Chief Information Officer (CIO)</h3></div></div>
+                    <input type="checkbox" name="passion" value="Chief Information Officer (CIO)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CISO</div><div><h3>Chief Information Security Officer (CISO)</h3></div></div>
+                    <input type="checkbox" name="passion" value="Chief Information Security Officer (CISO)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CTO</div><div><h3>Chief Technology Officer (CTO)</h3></div></div>
+                    <input type="checkbox" name="passion" value="Chief Technology Officer (CTO)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">HW</div><div><h3>Circuit Design Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Circuit Design Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CA</div><div><h3>Cloud Architect</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cloud Architect" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CL</div><div><h3>Cloud Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cloud Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CF</div><div><h3>Cloud FinOps Specialist</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cloud FinOps Specialist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CS</div><div><h3>Cloud Security Architect</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cloud Security Architect" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CS</div><div><h3>Cloud Security Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cloud Security Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SA</div><div><h3>Cloud Systems Administrator</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cloud Systems Administrator" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SEC</div><div><h3>Compliance Security Specialist</h3></div></div>
+                    <input type="checkbox" name="passion" value="Compliance Security Specialist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CV</div><div><h3>Computer Vision Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Computer Vision Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CR</div><div><h3>Cryptographer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cryptographer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CS</div><div><h3>Customer Success Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Customer Success Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SEC</div><div><h3>Cyber Security Director</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cyber Security Director" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">CY</div><div><h3>Cybersecurity Analyst</h3></div></div>
+                    <input type="checkbox" name="passion" value="Cybersecurity Analyst" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DA</div><div><h3>Data Analyst</h3></div></div>
+                    <input type="checkbox" name="passion" value="Data Analyst" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DA</div><div><h3>Data Architect</h3></div></div>
+                    <input type="checkbox" name="passion" value="Data Architect" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DC</div><div><h3>Data Center Technician</h3></div></div>
+                    <input type="checkbox" name="passion" value="Data Center Technician" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DE</div><div><h3>Data Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Data Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DG</div><div><h3>Data Governance Specialist</h3></div></div>
+                    <input type="checkbox" name="passion" value="Data Governance Specialist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DS</div><div><h3>Data Science Manager</h3></div></div>
+                    <input type="checkbox" name="passion" value="Data Science Manager" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DS</div><div><h3>Data Scientist</h3></div></div>
+                    <input type="checkbox" name="passion" value="Data Scientist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DO</div><div><h3>DataOps Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="DataOps Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DB</div><div><h3>Database Administrator (DBA)</h3></div></div>
+                    <input type="checkbox" name="passion" value="Database Administrator (DBA)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DB</div><div><h3>Database Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Database Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DL</div><div><h3>Deep Learning Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Deep Learning Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DM</div><div><h3>Delivery Manager</h3></div></div>
+                    <input type="checkbox" name="passion" value="Delivery Manager" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DA</div><div><h3>Desktop Application Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Desktop Application Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DO</div><div><h3>DevOps Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="DevOps Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DS</div><div><h3>DevSecOps Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="DevSecOps Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DA</div><div><h3>Developer Advocate</h3></div></div>
+                    <input type="checkbox" name="passion" value="Developer Advocate" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DE</div><div><h3>Developer Evangelist</h3></div></div>
+                    <input type="checkbox" name="passion" value="Developer Evangelist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DF</div><div><h3>Digital Forensics Expert</h3></div></div>
+                    <input type="checkbox" name="passion" value="Digital Forensics Expert" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DE</div><div><h3>Director of Engineering</h3></div></div>
+                    <input type="checkbox" name="passion" value="Director of Engineering" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">D3</div><div><h3>Dynamics 365 Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Dynamics 365 Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">ERP</div><div><h3>ERP Technical Consultant</h3></div></div>
+                    <input type="checkbox" name="passion" value="ERP Technical Consultant" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">ES</div><div><h3>Embedded Systems Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Embedded Systems Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">EM</div><div><h3>Engineering Manager</h3></div></div>
+                    <input type="checkbox" name="passion" value="Engineering Manager" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">EA</div><div><h3>Enterprise Architect</h3></div></div>
+                    <input type="checkbox" name="passion" value="Enterprise Architect" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">EH</div><div><h3>Ethical Hacker</h3></div></div>
+                    <input type="checkbox" name="passion" value="Ethical Hacker" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">FP</div><div><h3>FPGA Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="FPGA Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">FW</div><div><h3>Firmware Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Firmware Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">FC</div><div><h3>Forensic Computer Analyst</h3></div></div>
+                    <input type="checkbox" name="passion" value="Forensic Computer Analyst" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">FE</div><div><h3>Frontend Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Frontend Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">FE</div><div><h3>Frontend Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Frontend Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">FS</div><div><h3>Full Stack Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Full Stack Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">FS</div><div><h3>Full Stack Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Full Stack Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">GIS</div><div><h3>GIS Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="GIS Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">GM</div><div><h3>Game Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Game Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">GA</div><div><h3>Geospatial Analyst</h3></div></div>
+                    <input type="checkbox" name="passion" value="Geospatial Analyst" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">GO</div><div><h3>Golang Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Golang Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">GX</div><div><h3>Graphics Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Graphics Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">HW</div><div><h3>Hardware Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Hardware Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IT</div><div><h3>Help Desk Technician</h3></div></div>
+                    <input type="checkbox" name="passion" value="Help Desk Technician" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IT</div><div><h3>IT Auditor</h3></div></div>
+                    <input type="checkbox" name="passion" value="IT Auditor" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IT</div><div><h3>IT Operations Manager</h3></div></div>
+                    <input type="checkbox" name="passion" value="IT Operations Manager" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IT</div><div><h3>IT Procurement Specialist</h3></div></div>
+                    <input type="checkbox" name="passion" value="IT Procurement Specialist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IT</div><div><h3>IT Support Specialist</h3></div></div>
+                    <input type="checkbox" name="passion" value="IT Support Specialist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IAM</div><div><h3>Identity and Access Management (IAM) Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Identity and Access Management (IAM) Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IR</div><div><h3>Incident Responder</h3></div></div>
+                    <input type="checkbox" name="passion" value="Incident Responder" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IA</div><div><h3>Information Architect</h3></div></div>
+                    <input type="checkbox" name="passion" value="Information Architect" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IS</div><div><h3>Information Security Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Information Security Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">INF</div><div><h3>Infrastructure Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Infrastructure Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IM</div><div><h3>Infrastructure Manager</h3></div></div>
+                    <input type="checkbox" name="passion" value="Infrastructure Manager" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">UX</div><div><h3>Interaction Designer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Interaction Designer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">IoT</div><div><h3>IoT Engineer (Internet of Things)</h3></div></div>
+                    <input type="checkbox" name="passion" value="IoT Engineer (Internet of Things)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">JV</div><div><h3>Java Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Java Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">JS</div><div><h3>JavaScript Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="JavaScript Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">JR</div><div><h3>Junior Software Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Junior Software Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">KT</div><div><h3>Kotlin Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Kotlin Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">LD</div><div><h3>Lead Data Scientist</h3></div></div>
+                    <input type="checkbox" name="passion" value="Lead Data Scientist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">LS</div><div><h3>Lead Software Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Lead Software Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">LX</div><div><h3>Linux Administrator</h3></div></div>
+                    <input type="checkbox" name="passion" value="Linux Administrator" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">LX</div><div><h3>Linux System Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Linux System Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">ML</div><div><h3>MLOps Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="MLOps Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">ML</div><div><h3>Machine Learning Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Machine Learning Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">MF</div><div><h3>Mainframe Programmer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Mainframe Programmer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">MT</div><div><h3>Manual Tester</h3></div></div>
+                    <input type="checkbox" name="passion" value="Manual Tester" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">MO</div><div><h3>Mobile Application Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Mobile Application Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">NLP</div><div><h3>NLP Engineer (Natural Language Processing)</h3></div></div>
+                    <input type="checkbox" name="passion" value="NLP Engineer (Natural Language Processing)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">NA</div><div><h3>Network Architect</h3></div></div>
+                    <input type="checkbox" name="passion" value="Network Architect" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">NE</div><div><h3>Network Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Network Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">NOC</div><div><h3>Network Operations Center (NOC) Technician</h3></div></div>
+                    <input type="checkbox" name="passion" value="Network Operations Center (NOC) Technician" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">NS</div><div><h3>Network Security Administrator</h3></div></div>
+                    <input type="checkbox" name="passion" value="Network Security Administrator" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">NS</div><div><h3>Network Security Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Network Security Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PHP</div><div><h3>PHP Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="PHP Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PT</div><div><h3>Penetration Tester</h3></div></div>
+                    <input type="checkbox" name="passion" value="Penetration Tester" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PT</div><div><h3>Performance Testing Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Performance Testing Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PL</div><div><h3>Perl Programmer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Perl Programmer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PE</div><div><h3>Platform Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Platform Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PS</div><div><h3>Principal Software Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Principal Software Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PD</div><div><h3>Product Designer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Product Designer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PM</div><div><h3>Product Manager</h3></div></div>
+                    <input type="checkbox" name="passion" value="Product Manager" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PO</div><div><h3>Product Owner</h3></div></div>
+                    <input type="checkbox" name="passion" value="Product Owner" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PJ</div><div><h3>Project Manager</h3></div></div>
+                    <input type="checkbox" name="passion" value="Project Manager" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">AI</div><div><h3>Prompt Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Prompt Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PY</div><div><h3>Python Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Python Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">QA</div><div><h3>QA Engineer (Quality Assurance)</h3></div></div>
+                    <input type="checkbox" name="passion" value="QA Engineer (Quality Assurance)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">QA</div><div><h3>QA Lead</h3></div></div>
+                    <input type="checkbox" name="passion" value="QA Lead" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">QA</div><div><h3>Quantitative Analyst</h3></div></div>
+                    <input type="checkbox" name="passion" value="Quantitative Analyst" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">QC</div><div><h3>Quantum Computing Scientist</h3></div></div>
+                    <input type="checkbox" name="passion" value="Quantum Computing Scientist" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">RE</div><div><h3>Release Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Release Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">RO</div><div><h3>Robotics Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Robotics Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">RB</div><div><h3>Ruby on Rails Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Ruby on Rails Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">RS</div><div><h3>Rust Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Rust Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SAP</div><div><h3>SAP Consultant</h3></div></div>
+                    <input type="checkbox" name="passion" value="SAP Consultant" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SOC</div><div><h3>SOC Analyst (Security Operations Center)</h3></div></div>
+                    <input type="checkbox" name="passion" value="SOC Analyst (Security Operations Center)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SE</div><div><h3>Sales Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Sales Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SF</div><div><h3>Salesforce Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Salesforce Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SC</div><div><h3>Scala Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Scala Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SM</div><div><h3>Scrum Master</h3></div></div>
+                    <input type="checkbox" name="passion" value="Scrum Master" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">PO</div><div><h3>Scrum Product Owner</h3></div></div>
+                    <input type="checkbox" name="passion" value="Scrum Product Owner" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SA</div><div><h3>Security Architect</h3></div></div>
+                    <input type="checkbox" name="passion" value="Security Architect" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SQ</div><div><h3>Security QA Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Security QA Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">DE</div><div><h3>Senior Data Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Senior Data Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">NE</div><div><h3>Senior Network Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Senior Network Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SE</div><div><h3>Senior Software Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Senior Software Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SN</div><div><h3>ServiceNow Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="ServiceNow Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SP</div><div><h3>SharePoint Administrator</h3></div></div>
+                    <input type="checkbox" name="passion" value="SharePoint Administrator" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SC</div><div><h3>Site Core Developer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Site Core Developer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SRE</div><div><h3>Site Reliability Engineer (SRE)</h3></div></div>
+                    <input type="checkbox" name="passion" value="Site Reliability Engineer (SRE)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SR</div><div><h3>Site Reliability Manager</h3></div></div>
+                    <input type="checkbox" name="passion" value="Site Reliability Manager" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SC</div><div><h3>Smart Contract Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Smart Contract Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SE</div><div><h3>Software Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Software Engineer" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SDET</div><div><h3>Software Engineer in Test (SDET)</h3></div></div>
+                    <input type="checkbox" name="passion" value="Software Engineer in Test (SDET)" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SA</div><div><h3>Solutions Architect</h3></div></div>
+                    <input type="checkbox" name="passion" value="Solutions Architect" class="passionCheck">
+                </label>
+
+                <label class="passion group">
+                    <div class="role-content"><div class="role-icon">SE</div><div><h3>Solutions Engineer</h3></div></div>
+                    <input type="checkbox" name="passion" value="Solutions Engineer" class="passionCheck">
+                </label>
+
+            </div>
+
+
+            <!-- Continue -->
+            <button type="submit"
+                class="w-full mt-7 h-14 rounded-2xl
+                       bg-[#9a5b45]
+                       hover:bg-[#864b38]
+                       text-white
+                       font-semibold
+                       shadow-[0_8px_20px_rgba(154,91,69,0.22)]
+                       hover:shadow-[0_10px_25px_rgba(154,91,69,0.28)]
+                       transition">
+
+                Continue
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <style>
+
+        .passion {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            min-height: 76px;
+            padding: 16px 18px;
+
+            background: white;
+            border: 1px solid #e7ddd4;
+            border-radius: 18px;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+        }
+
+
+        .passion:hover {
+            background: #fcf9f6;
+            border-color: #d9c4b7;
+            transform: translateY(-1px);
+        }
+
+
+        .passion:has(.passionCheck:checked) {
+            background: #f8eee8;
+            border-color: #b86f55;
+            box-shadow: 0 4px 14px rgba(154, 91, 69, 0.08);
+        }
+
+
+        .role-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+
+        .role-icon {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #eee3da;
+            color: #8f5845;
+
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+
+        .passion h3 {
+            font-size: 14px;
+            line-height: 1.35;
+            font-weight: 600;
+            color: #332b27;
+        }
+
+
+        .passionCheck {
+            width: 20px;
+            height: 20px;
+
+            flex-shrink: 0;
+
+            accent-color: #9a5b45;
+
+            cursor: pointer;
+        }
+
+
+        @media (max-width: 640px) {
+
+            .passion {
+                min-height: 70px;
+                padding: 14px;
+            }
+
+            .role-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .passion h3 {
+                font-size: 13px;
+            }
+
+        }
+
+    </style>
+
+
+    <script>
+
+        const checkboxes = document.querySelectorAll(".passionCheck");
+        const count = document.getElementById("count");
+        const search = document.getElementById("search");
+        const passions = document.querySelectorAll(".passion");
+
+
+        // Update selected count
+        checkboxes.forEach(checkbox => {
+
+            checkbox.addEventListener("change", () => {
+
+                const selected =
+                    document.querySelectorAll(".passionCheck:checked").length;
+
+                count.textContent = selected;
+
+            });
+
+        });
+
+
+        // Search job roles
+        search.addEventListener("input", () => {
+
+            const value = search.value.toLowerCase();
+
+            passions.forEach(passion => {
+
+                const text = passion.textContent.toLowerCase();
+
+                if (text.includes(value)) {
+
+                    passion.style.display = "flex";
+
+                } else {
+
+                    passion.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+
+        // Clear selections
+        function clearAll() {
+
+            checkboxes.forEach(checkbox => {
+
+                checkbox.checked = false;
+
+            });
+
+            count.textContent = "0";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+

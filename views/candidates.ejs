@@ -1,0 +1,192 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Candidates - JobFinder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#fffaf5] text-stone-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-orange-100">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <a href="/" class="text-2xl font-bold text-orange-500">
+                JobFinder
+            </a>
+
+            <a href="/recruiter-home"
+                class="px-5 py-2.5 rounded-xl bg-orange-500 text-white font-semibold hover:bg-orange-600 transition">
+                Dashboard
+            </a>
+
+        </div>
+    </nav>
+
+
+    <!-- Main -->
+    <main class="max-w-7xl mx-auto px-6 py-12">
+
+        <!-- Heading -->
+        <div class="mb-10">
+            <p class="text-orange-500 font-semibold text-sm uppercase tracking-wider">
+                JobFinder
+            </p>
+
+            <h1 class="text-4xl font-bold text-stone-900 mt-2">
+                Find Candidates
+            </h1>
+
+            <p class="text-stone-500 mt-3">
+                Browse candidates and discover talented people for your jobs.
+            </p>
+        </div>
+
+
+        <% if (candidates && candidates.length > 0) { %>
+
+            <!-- Candidates Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <% candidates.forEach(candidate => { %>
+
+                    <div
+                        class="bg-white border border-orange-100 rounded-3xl p-6 shadow-sm hover:shadow-lg transition">
+
+                        <!-- Avatar + Username -->
+                        <div class="flex items-center gap-4">
+
+                            <div
+                                class="w-16 h-16 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl font-bold">
+
+                                <%= candidate.username
+                                    ? candidate.username.charAt(0).toUpperCase()
+                                    : "U" %>
+
+                            </div>
+
+                            <div>
+                                <h2 class="text-xl font-bold text-stone-900">
+                                    <%= candidate.username || "Unknown User" %>
+                                </h2>
+
+                                <p class="text-sm text-stone-500">
+                                    Candidate
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Candidate Details -->
+                        <div class="mt-6 space-y-4">
+
+                            <!-- Email -->
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center">
+                                    📧
+                                </div>
+
+                                <div>
+                                    <p class="text-xs text-stone-400">
+                                        Email
+                                    </p>
+
+                                    <p class="text-sm font-medium text-stone-700 break-all">
+                                        <%= candidate.email || "Not provided" %>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <!-- Passion -->
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center">
+                                    💼
+                                </div>
+
+                                <div>
+                                    <p class="text-xs text-stone-400">
+                                        Passion
+                                    </p>
+
+                                    <p class="text-sm font-medium text-stone-700">
+                                        <%= candidate.passion || "Not selected" %>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                            <!-- Role -->
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center">
+                                    👤
+                                </div>
+
+                                <div>
+                                    <p class="text-xs text-stone-400">
+                                        Role
+                                    </p>
+
+                                    <p class="text-sm font-medium text-stone-700 capitalize">
+                                        <%= candidate.role || "Not selected" %>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- View Profile -->
+                        <div class="mt-7 pt-5 border-t border-stone-100">
+
+                            <a href="/candidate/<%= candidate._id %>"
+                                class="block w-full text-center px-5 py-3 rounded-xl bg-stone-900 text-white font-semibold hover:bg-orange-500 transition">
+                                View Profile
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } else { %>
+
+            <!-- Empty State -->
+            <div class="bg-white border border-orange-100 rounded-3xl p-12 text-center">
+
+                <div
+                    class="w-16 h-16 mx-auto rounded-2xl bg-orange-100 flex items-center justify-center text-2xl">
+                    👤
+                </div>
+
+                <h2 class="text-2xl font-bold text-stone-900 mt-5">
+                    No Candidates Found
+                </h2>
+
+                <p class="text-stone-500 mt-2">
+                    There are currently no candidates registered.
+                </p>
+
+            </div>
+
+        <% } %>
+
+    </main>
+
+</body>
+
+</html>
+```

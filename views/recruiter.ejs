@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recruiter Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#faf7f2] text-stone-900 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="border-b border-stone-200 bg-[#faf7f2]">
+
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-orange-500
+                            flex items-center justify-center text-white font-bold">
+                    J
+                </div>
+
+                <h1 class="text-xl font-bold">
+                    JobFinder
+                </h1>
+
+            </div>
+            <div class="flex items-center gap-4">
+
+                <span class="hidden sm:block text-sm text-stone-500">
+                    <%= recruiter.recruiterName %>
+                </span>
+
+                <div class="w-10 h-10 rounded-full bg-stone-900
+                            text-white flex items-center justify-center
+                            font-semibold">
+                    <a href="/profile">
+                        R
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+
+
+        <!-- Welcome -->
+        <div class="flex flex-col md:flex-row md:items-end
+                    justify-between gap-6 mb-10">
+
+            <div>
+
+                <p class="text-sm font-semibold text-orange-600 mb-2">
+                    RECRUITER DASHBOARD
+                </p>
+
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight">
+                    Find your next great hire.
+                </h2>
+
+                <p class="text-stone-500 mt-4 max-w-xl text-lg">
+                    Manage your job postings, review applications,
+                    and discover talented candidates.
+                </p>
+
+            </div>
+
+
+            <!-- Post Job -->
+            <a href="/post-job" class="inline-flex items-center justify-center gap-3
+                       bg-orange-500 hover:bg-orange-600
+                       text-white font-semibold
+                       px-6 py-3.5 rounded-xl
+                       transition shadow-sm">
+
+                <span class="text-xl">+</span>
+
+                Post a job
+
+            </a>
+
+        </div>
+
+
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+
+
+            <!-- Active Jobs -->
+            <div class="bg-white border border-stone-200
+                        rounded-2xl p-6 shadow-sm">
+
+                <div class="flex items-center justify-between mb-5">
+
+                    <p class="text-sm text-stone-500">
+                        Active Jobs
+                    </p>
+
+                    <div class="w-10 h-10 rounded-xl
+                                bg-orange-100 text-orange-600
+                                flex items-center justify-center">
+
+                        💼
+
+                    </div>
+
+                </div>
+
+                <h3 class="text-3xl font-bold">
+                    12
+                </h3>
+
+                <p class="text-sm text-green-600 mt-2">
+                    +3 this month
+                </p>
+
+            </div>
+
+
+
+            <!-- Applications -->
+            <div class="bg-white border border-stone-200
+                        rounded-2xl p-6 shadow-sm">
+
+                <div class="flex items-center justify-between mb-5">
+
+                    <p class="text-sm text-stone-500">
+                        Applications
+                    </p>
+
+                    <div class="w-10 h-10 rounded-xl
+                                bg-orange-100 text-orange-600
+                                flex items-center justify-center">
+
+                        📄
+
+                    </div>
+
+                </div>
+
+                <h3 class="text-3xl font-bold">
+                    86
+                </h3>
+
+                <p class="text-sm text-green-600 mt-2">
+                    +18% this month
+                </p>
+
+            </div>
+
+
+
+            <!-- Candidates -->
+            <div class="bg-white border border-stone-200
+                        rounded-2xl p-6 shadow-sm">
+
+                <div class="flex items-center justify-between mb-5">
+
+                    <a href="/candidates" class="text-sm text-stone-500">
+                        Candidates
+                    </a>
+
+                    <div class="w-10 h-10 rounded-xl
+                                bg-orange-100 text-orange-600
+                                flex items-center justify-center">
+
+                        👥
+
+                    </div>
+
+                </div>
+
+                <h3 class="text-3xl font-bold">
+                    42
+                </h3>
+
+                <p class="text-sm text-stone-500 mt-2">
+                    In review
+                </p>
+
+            </div>
+
+
+
+            <!-- Interviews -->
+            <div class="bg-[#292524] text-white
+                        rounded-2xl p-6 shadow-sm">
+
+                <div class="flex items-center justify-between mb-5">
+
+                    <p class="text-sm text-stone-400">
+                        Interviews
+                    </p>
+
+                    <div class="w-10 h-10 rounded-xl
+                                bg-orange-500/15 text-orange-400
+                                flex items-center justify-center">
+
+                        ✓
+
+                    </div>
+
+                </div>
+
+                <h3 class="text-3xl font-bold">
+                    8
+                </h3>
+
+                <p class="text-sm text-orange-400 mt-2">
+                    Scheduled this week
+                </p>
+
+            </div>
+        </div>
+
+
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+
+
+            <!-- Recent Jobs -->
+            <div class="lg:col-span-2 bg-white
+                border border-stone-200
+                rounded-3xl p-7 shadow-sm">
+
+                <div class="flex items-center justify-between mb-7">
+
+                    <div>
+                        <p class="text-sm font-semibold text-orange-600">
+                            YOUR JOBS
+                        </p>
+
+                        <h3 class="text-2xl font-bold mt-1">
+                            Recent job postings
+                        </h3>
+                    </div>
+
+                    <a href="/jobs" class="text-sm font-semibold text-stone-600
+                      hover:text-orange-600 transition">
+                        View all →
+                    </a>
+
+                </div>
+
+
+                <!-- Dynamic Jobs -->
+
+                <% jobs.forEach(job=> { %>
+
+                    <div class="border border-stone-200
+                        rounded-2xl p-5 mb-4
+                        hover:border-orange-200
+                        transition">
+
+                        <div class="flex items-start justify-between gap-4">
+
+                            <div class="flex gap-4">
+
+                                <div class="w-12 h-12 rounded-xl
+                                    bg-orange-100
+                                    flex items-center justify-center
+                                    text-orange-600 text-xl">
+                                    💼
+                                </div>
+
+                                <div>
+
+                                    <p class="text-sm text-stone-500 mt-1">
+                                        <%= job.firmName %>
+                                    </p>
+
+                                    <h4 class="font-bold text-lg">
+                                        <%= job.title %>
+                                    </h4>
+
+                                    <p class="text-sm text-stone-500 mt-1">
+                                        <%= job.location %> · <%= job.jobType %>
+                                    </p>
+                                    <a href="/jobDetails">see details</a>
+                                </div>
+
+                            </div>
+
+
+                            <span class="px-3 py-1 rounded-full
+                                 bg-green-100 text-green-700
+                                 text-xs font-semibold">
+                                Active
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <% }) %>
+
+            </div>
+
+
+            <!-- Right Side -->
+            <div class="lg:col-span-1 space-y-6">
+
+
+                <!-- Quick Actions -->
+                <div class="bg-[#292524] text-white
+                    rounded-3xl p-7">
+
+                    <p class="text-sm font-semibold text-orange-400">
+                        QUICK ACTIONS
+                    </p>
+
+                    <h3 class="text-2xl font-bold mt-2 mb-6">
+                        Manage your hiring
+                    </h3>
+
+                    <a href="/post-job" class="flex items-center justify-between
+                      bg-orange-500 hover:bg-orange-600
+                      rounded-xl px-5 py-4
+                      font-semibold transition mb-3">
+
+                        <span>Post a new job</span>
+                        <span>→</span>
+
+                    </a>
+
+                    <a href="/applications" class="flex items-center justify-between
+                      bg-white/10 hover:bg-white/15
+                      rounded-xl px-5 py-4
+                      font-semibold transition mb-3">
+
+                        <span>View applications</span>
+                        <span>→</span>
+
+                    </a>
+
+                    <a href="/candidates" class="flex items-center justify-between
+                      bg-white/10 hover:bg-white/15
+                      rounded-xl px-5 py-4
+                      font-semibold transition">
+
+                        <span>Find candidates</span>
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- Hiring Tip -->
+                <div class="bg-orange-50 border border-orange-100
+                    rounded-3xl p-7">
+
+                    <div class="w-11 h-11 rounded-xl
+                        bg-orange-100 text-orange-600
+                        flex items-center justify-center
+                        text-xl mb-5">
+                        ✦
+                    </div>
+
+                    <p class="text-sm font-semibold text-orange-600">
+                        HIRING TIP
+                    </p>
+
+                    <h3 class="text-xl font-bold mt-2">
+                        Great jobs attract great people.
+                    </h3>
+
+                    <p class="text-stone-500 text-sm
+                      leading-relaxed mt-3">
+                        Add a clear job description, salary range,
+                        and required skills to get better applications.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>All Jobs - JobFinder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#fffaf5] text-stone-800">
+
+    <!-- Navbar -->
+    <nav class="border-b border-orange-100 bg-white/80 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <h1 class="text-2xl font-bold text-orange-500">
+                JobFinder
+            </h1>
+
+            <div class="flex items-center gap-6 text-sm font-medium">
+
+                <a href="/recruiter-home"
+                   class="text-stone-600 hover:text-orange-500">
+                    Home
+                </a>
+
+                <a href="/jobs"
+                   class="text-orange-500">
+                    Jobs
+                </a>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- Header -->
+    <section class="max-w-7xl mx-auto px-6 pt-12 pb-8">
+
+        <p class="text-sm font-semibold text-orange-500 uppercase tracking-wider">
+            Find your next opportunity
+        </p>
+
+        <h1 class="text-4xl md:text-5xl font-bold mt-2 text-stone-900">
+            Explore All Jobs
+        </h1>
+
+        <p class="mt-4 text-stone-500 max-w-2xl">
+            Discover technical jobs from companies looking for talented people.
+        </p>
+
+    </section>
+
+
+    <!-- Jobs -->
+    <main class="max-w-7xl mx-auto px-6 pb-16">
+
+        <% if (jobs.length === 0) { %>
+
+            <div class="bg-white border border-orange-100 rounded-2xl p-12 text-center">
+
+                <div class="text-5xl mb-4">
+                    🔍
+                </div>
+
+                <h2 class="text-xl font-bold text-stone-800">
+                    No jobs available
+                </h2>
+
+                <p class="text-stone-500 mt-2">
+                    There are currently no jobs posted.
+                </p>
+
+            </div>
+
+        <% } else { %>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <% jobs.forEach(job => { %>
+
+                    <div class="bg-white border border-orange-100 rounded-2xl p-6
+                                hover:shadow-lg hover:-translate-y-1
+                                transition duration-200">
+
+
+                        <!-- Job Header -->
+                        <div class="flex items-start justify-between gap-4">
+
+                            <div class="w-12 h-12 rounded-xl bg-orange-100
+                                        flex items-center justify-center
+                                        text-orange-500 font-bold text-xl">
+
+                                <%= job.title
+                                    ? job.title.charAt(0).toUpperCase()
+                                    : "J"
+                                %>
+
+                            </div>
+
+
+                            <% if (job.jobType) { %>
+
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold
+                                             bg-orange-50 text-orange-600">
+
+                                    <%= job.jobType %>
+
+                                </span>
+
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- Job Information -->
+                        <div class="mt-5">
+
+                            <h2 class="text-xl font-bold text-stone-900">
+                                <%= job.title %>
+                            </h2>
+
+
+                            <!-- Company -->
+                            <% if (job.company) { %>
+
+                                <p class="mt-1 text-sm font-medium text-orange-500">
+                                    <%= job.company.companyName %>
+                                </p>
+
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- Job Details -->
+                        <div class="mt-5 space-y-3 text-sm text-stone-500">
+
+
+                            <!-- Job Location -->
+                            <% if (job.location) { %>
+
+                                <div class="flex items-center gap-2">
+                                    <span>📍</span>
+                                    <span>
+                                        <%= job.location %>
+                                    </span>
+                                </div>
+
+                            <% } %>
+
+
+                            <!-- Workplace -->
+                            <% if (job.workplace) { %>
+
+                                <div class="flex items-center gap-2">
+                                    <span>💼</span>
+                                    <span>
+                                        <%= job.workplace %>
+                                    </span>
+                                </div>
+
+                            <% } %>
+
+
+                            <!-- Category -->
+                            <% if (job.category) { %>
+
+                                <div class="flex items-center gap-2">
+                                    <span>🏷️</span>
+                                    <span>
+                                        <%= job.category %>
+                                    </span>
+                                </div>
+
+                            <% } %>
+
+
+                            <!-- Salary -->
+                            <% if (job.salary) { %>
+
+                                <div class="flex items-center gap-2">
+                                    <span>💰</span>
+
+                                    <span>
+
+                                        <%= job.salary %>
+
+                                        <% if (job.salaryMax) { %>
+                                            - <%= job.salaryMax %>
+                                        <% } %>
+
+                                    </span>
+
+                                </div>
+
+                            <% } %>
+
+
+                            <!-- Company Industry -->
+                            <% if (job.company && job.company.industry) { %>
+
+                                <div class="flex items-center gap-2">
+                                    <span>🏢</span>
+
+                                    <span>
+                                        <%= job.company.industry %>
+                                    </span>
+
+                                </div>
+
+                            <% } %>
+
+                        </div>
+
+
+                        <!-- Description -->
+                        <% if (job.description) { %>
+
+                            <p class="mt-5 text-sm text-stone-500 leading-6 line-clamp-3">
+                                <%= job.description %>
+                            </p>
+
+                        <% } %>
+
+
+                        <!-- Footer -->
+                        <div class="mt-6 pt-5 border-t border-stone-100
+                                    flex items-center justify-between">
+
+                            <% if (job.createdAt) { %>
+
+                                <span class="text-xs text-stone-400">
+                                    <%= new Date(job.createdAt).toLocaleDateString() %>
+                                </span>
+
+                            <% } %>
+
+
+                            <a href="/job/<%= job._id %>"
+                               class="px-4 py-2 rounded-xl bg-orange-500
+                                      text-white text-sm font-semibold
+                                      hover:bg-orange-600 transition">
+
+                                View Job
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } %>
+
+    </main>
+
+</body>
+
+</html>

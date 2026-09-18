@@ -1,0 +1,208 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Candidate Profile - JobFinder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#fffaf5] text-stone-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-orange-100">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <a href="/" class="text-2xl font-bold text-orange-500">
+                JobFinder
+            </a>
+
+            <a href="/candidates"
+                class="px-5 py-2.5 rounded-xl bg-orange-500 text-white font-semibold hover:bg-orange-600 transition">
+                Back to Candidates
+            </a>
+
+        </div>
+    </nav>
+
+
+    <!-- Profile -->
+    <main class="max-w-4xl mx-auto px-6 py-12">
+
+        <!-- Profile Header -->
+        <div class="bg-white border border-orange-100 rounded-3xl shadow-sm overflow-hidden">
+
+            <!-- Orange Cover -->
+            <div class="h-32 bg-gradient-to-r from-orange-400 to-orange-500">
+            </div>
+
+
+            <div class="px-8 pb-8">
+
+                <!-- Avatar -->
+                <div class="-mt-12 mb-6">
+
+                    <div
+                        class="w-24 h-24 rounded-3xl bg-orange-100 border-4 border-white text-orange-600 flex items-center justify-center text-4xl font-bold shadow-sm">
+
+                        <%= user.username
+                            ? user.username.charAt(0).toUpperCase()
+                            : "U" %>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Name -->
+                <div>
+                    <h1 class="text-3xl font-bold text-stone-900">
+                        <%= user.username || "Unknown User" %>
+                    </h1>
+
+                    <p class="text-stone-500 mt-1">
+                        Candidate
+                    </p>
+                </div>
+
+
+                <!-- Details -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    <!-- Email -->
+                    <div class="bg-[#fffaf5] rounded-2xl p-5 border border-orange-100">
+
+                        <div class="flex items-center gap-3 mb-3">
+
+                            <div
+                                class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                                📧
+                            </div>
+
+                            <p class="text-sm font-semibold text-stone-500">
+                                Email
+                            </p>
+
+                        </div>
+
+                        <p class="font-medium text-stone-800 break-all">
+                            <%= user.email || "Not provided" %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- Passion -->
+                    <div class="bg-[#fffaf5] rounded-2xl p-5 border border-orange-100">
+
+                        <div class="flex items-center gap-3 mb-3">
+
+                            <div
+                                class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                                💼
+                            </div>
+
+                            <p class="text-sm font-semibold text-stone-500">
+                                Passion
+                            </p>
+
+                        </div>
+
+                        <p class="font-medium text-stone-800">
+                            <%= user.passion || "Not selected" %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- Role -->
+                    <div class="bg-[#fffaf5] rounded-2xl p-5 border border-orange-100">
+
+                        <div class="flex items-center gap-3 mb-3">
+
+                            <div
+                                class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                                👤
+                            </div>
+
+                            <p class="text-sm font-semibold text-stone-500">
+                                Role
+                            </p>
+
+                        </div>
+
+                        <p class="font-medium text-stone-800 capitalize">
+                            <%= user.role || "Not selected" %>
+                        </p>
+
+                    </div>
+
+
+                    <!-- Account -->
+                    <div class="bg-[#fffaf5] rounded-2xl p-5 border border-orange-100">
+
+                        <div class="flex items-center gap-3 mb-3">
+
+                            <div
+                                class="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center">
+                                ✓
+                            </div>
+
+                            <p class="text-sm font-semibold text-stone-500">
+                                Account Type
+                            </p>
+
+                        </div>
+
+                        <p class="font-medium text-stone-800">
+                            Job Seeker
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- About -->
+                <div class="mt-8 pt-8 border-t border-stone-100">
+
+                    <h2 class="text-xl font-bold text-stone-900">
+                        About Candidate
+                    </h2>
+
+                    <p class="text-stone-500 mt-3 leading-relaxed">
+                        <%= user.username || "This candidate" %>
+                        is a JobFinder candidate looking for opportunities
+                        related to
+                        <span class="font-semibold text-orange-500">
+                            <%= user.passion || "their field" %>
+                        </span>.
+                    </p>
+
+                </div>
+
+
+                <!-- Contact -->
+                <div class="mt-8">
+
+                    <a href="mailto:<%= user.email %>"
+                        class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-orange-500 text-white font-semibold hover:bg-orange-600 transition">
+                        Contact Candidate
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
+```

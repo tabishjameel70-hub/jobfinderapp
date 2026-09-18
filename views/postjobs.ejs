@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Post a Job - JobFinder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#faf7f2] text-[#171414]">
+
+    <!-- NAVBAR -->
+    <header class="h-[80px] border-b border-[#e6e1da] bg-[#faf7f2]">
+        <div class="h-full px-6 md:px-10 flex items-center justify-between">
+
+            <!-- Logo -->
+            <div class="flex items-center gap-4">
+                <div
+                    class="w-10 h-10 rounded-xl bg-[#ff7117] flex items-center justify-center text-white font-bold text-lg">
+                    J
+                </div>
+
+                <h1 class="text-xl font-bold tracking-tight">
+                    JobFinder
+                </h1>
+            </div>
+
+            <!-- Recruiter -->
+            <div class="flex items-center gap-4">
+                <span class="hidden sm:block text-sm text-[#756c65]">
+                    Recruiter
+                </span>
+
+                <div
+                    class="w-10 h-10 rounded-full bg-[#211f1e] text-white flex items-center justify-center font-semibold">
+                    R
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="max-w-6xl mx-auto px-5 md:px-8 py-10 md:py-14">
+
+        <!-- PAGE HEADER -->
+        <div class="mb-10">
+
+            <p class="text-[#ff5f00] text-sm font-medium uppercase tracking-wide mb-3">
+                Create a job posting
+            </p>
+
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                Find your next great hire.
+            </h2>
+
+            <p class="text-[#716963] text-base md:text-lg max-w-2xl leading-7">
+                Tell candidates about the role, your requirements, and what
+                makes this opportunity worth applying for.
+            </p>
+
+        </div>
+
+
+        <!-- CONTENT GRID -->
+        <div class="grid lg:grid-cols-[1fr_320px] gap-8">
+
+
+            <!-- FORM -->
+            <section class="bg-white border border-[#e4dfd8] rounded-3xl p-6 md:p-8">
+
+                <div class="mb-8">
+
+                    <h3 class="text-2xl font-bold mb-2">
+                        Job details
+                    </h3>
+
+                    <p class="text-sm text-[#817870]">
+                        Add the basic information candidates need.
+                    </p>
+
+                </div>
+
+
+                <form action="/post-job" method="POST" class="space-y-7">
+                    <!-- form name -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">
+                            Company name
+                        </label>
+
+                        <input type="text" name="firmName" value="<%= recruiter.companyName %>" disabled
+                            class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none transition focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]"
+                            required>
+
+                        <p class="text-xs text-[#938a83] mt-2">
+                            enter firm name!
+                        </p>
+                    </div>
+
+                    <!-- JOB TITLE -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">
+                            Job title
+                        </label>
+
+                        <input type="text" name="title" placeholder="e.g. Frontend Developer"
+                            class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none transition focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]"
+                            required>
+
+                        <p class="text-xs text-[#938a83] mt-2">
+                            Use a clear and specific job title.
+                        </p>
+                    </div>
+
+
+                    <!-- JOB TYPE + LOCATION -->
+                    <div class="grid md:grid-cols-2 gap-5">
+
+                        <!-- Job Type -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                Job type
+                            </label>
+
+                            <select name="jobType"
+                                class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10"
+                                required>
+
+                                <option value="">Select job type</option>
+                                <option value="full-time">Full-time</option>
+                                <option value="part-time">Part-time</option>
+                                <option value="contract">Contract</option>
+                                <option value="internship">Internship</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Location -->
+                        <div>
+
+                            <label class="block text-sm font-semibold mb-2">
+                                Location
+                            </label>
+
+                            <input type="text" name="location" value="<%= recruiter.location %>" disabled
+                                class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- WORKPLACE -->
+                    <div>
+
+                        <label class="block text-sm font-semibold mb-3">
+                            Workplace
+                        </label>
+
+                        <div class="grid grid-cols-3 gap-3">
+
+                            <label class="cursor-pointer">
+                                <input type="radio" name="workplace" value="remote" class="peer hidden" checked>
+
+                                <div
+                                    class="h-12 rounded-xl border border-[#ddd7d0] flex items-center justify-center text-sm font-medium peer-checked:border-[#ff7117] peer-checked:bg-[#fff1e6] peer-checked:text-[#e85b00] transition">
+                                    Remote
+                                </div>
+                            </label>
+
+
+                            <label class="cursor-pointer">
+                                <input type="radio" name="workplace" value="hybrid" class="peer hidden">
+
+                                <div
+                                    class="h-12 rounded-xl border border-[#ddd7d0] flex items-center justify-center text-sm font-medium peer-checked:border-[#ff7117] peer-checked:bg-[#fff1e6] peer-checked:text-[#e85b00] transition">
+                                    Hybrid
+                                </div>
+                            </label>
+
+
+                            <label class="cursor-pointer">
+                                <input type="radio" name="workplace" value="onsite" class="peer hidden">
+
+                                <div
+                                    class="h-12 rounded-xl border border-[#ddd7d0] flex items-center justify-center text-sm font-medium peer-checked:border-[#ff7117] peer-checked:bg-[#fff1e6] peer-checked:text-[#e85b00] transition">
+                                    On-site
+                                </div>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+                    <div>
+
+                        <label class="block text-sm font-semibold mb-2">
+                            Job category
+                        </label>
+
+                        <select name="category"
+                            class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10"
+                            required>
+
+                            <option value="">Select a category</option>
+
+                            <option>AI Ethicist</option>
+                            <option>AI Research Scientist</option>
+                            <option>API Engineer</option>
+                            <option>AR/VR Developer</option>
+                            <option>ASIC Design Engineer</option>
+                            <option>Agile Coach</option>
+                            <option>Android Developer</option>
+                            <option>Application Security Engineer</option>
+                            <option>Application Support Analyst</option>
+                            <option>Automation Engineer</option>
+                            <option>Automation Test Engineer</option>
+                            <option>Backend Developer</option>
+                            <option>Cloud Engineer</option>
+                            <option>Cybersecurity Engineer</option>
+                            <option>Data Analyst</option>
+                            <option>Data Engineer</option>
+                            <option>DevOps Engineer</option>
+                            <option>Frontend Developer</option>
+                            <option>Full Stack Developer</option>
+                            <option>Machine Learning Engineer</option>
+                            <option>Mobile App Developer</option>
+                            <option>QA Engineer</option>
+                            <option>Software Engineer</option>
+                            <option>UI/UX Designer</option>
+                            <option>Web Developer</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SALARY -->
+                    <div>
+
+                        <label class="block text-sm font-semibold mb-2">
+                            Salary range
+                        </label>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+
+                            <input type="text" name="salaryMin" placeholder="Minimum salary"
+                                class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]">
+
+                            <input type="text" name="salaryMax" placeholder="Maximum salary"
+                                class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+                    <div>
+
+                        <label class="block text-sm font-semibold mb-2">
+                            Job description
+                        </label>
+
+                        <textarea name="description"
+                            class="w-full p-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none resize-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]"
+                            rows="8" required>Looking for a self-motivated professional to streamline internal workflows and facilitate team communication. You will be responsible for overseeing day-to-day administrative tasks, tracking project milestones, and ensuring effective cross-team execution.
+
+Key Responsibilities:
+Manage project timelines and deliverable schedules.
+Communicate requirements across internal teams and stakeholders.
+Identify process bottlenecks and propose efficiency improvements.</textarea>
+                    </div>
+
+
+                    <!-- REQUIREMENTS -->
+                    <div>
+
+                        <label class="block text-sm font-semibold mb-2">
+                            Requirements
+                        </label>
+
+                        <textarea name="requirements" rows="6"
+                            placeholder="e.g.&#10;• 2+ years of experience&#10;• Strong JavaScript knowledge&#10;• Experience with React"
+                            class="w-full p-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none resize-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]"
+                            required></textarea>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+                    <div class="pt-3 border-t border-[#ebe6e0] flex flex-col sm:flex-row gap-3 sm:justify-end">
+
+                        <button type="button"
+                            class="h-12 px-6 rounded-xl border border-[#ddd7d0] text-sm font-semibold hover:bg-[#f7f3ee] transition">
+                            Save as draft
+                        </button>
+
+                        <button type="submit"
+                            class="h-12 px-7 rounded-xl bg-[#ff7117] text-white text-sm font-semibold hover:bg-[#ed620c] transition flex items-center justify-center gap-2">
+
+                            <span>+</span>
+                            Post job
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- RIGHT SIDEBAR -->
+            <aside class="space-y-5">
+
+
+                <!-- POSTING TIPS -->
+                <div class="bg-[#292625] rounded-3xl p-7 text-white">
+
+                    <p class="text-[#ff7117] text-xs font-semibold uppercase tracking-wide mb-3">
+                        Quick tips
+                    </p>
+
+                    <h3 class="text-2xl font-bold mb-6">
+                        Create a better job post.
+                    </h3>
+
+
+                    <div class="space-y-5">
+
+                        <div class="flex gap-4">
+
+                            <div
+                                class="w-9 h-9 shrink-0 rounded-lg bg-[#413936] flex items-center justify-center text-[#ff8a42]">
+                                ✓
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1">
+                                    Clear job title
+                                </h4>
+
+                                <p class="text-xs text-[#aaa19a] leading-5">
+                                    Keep the title simple so the right candidates
+                                    can find your job easily.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex gap-4">
+
+                            <div
+                                class="w-9 h-9 shrink-0 rounded-lg bg-[#413936] flex items-center justify-center text-[#ff8a42]">
+                                ✓
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1">
+                                    Explain the role
+                                </h4>
+
+                                <p class="text-xs text-[#aaa19a] leading-5">
+                                    Describe responsibilities and what the candidate
+                                    will actually work on.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex gap-4">
+
+                            <div
+                                class="w-9 h-9 shrink-0 rounded-lg bg-[#413936] flex items-center justify-center text-[#ff8a42]">
+                                ✓
+                            </div>
+
+                            <div>
+                                <h4 class="font-semibold text-sm mb-1">
+                                    Add requirements
+                                </h4>
+
+                                <p class="text-xs text-[#aaa19a] leading-5">
+                                    Mention the skills and experience needed for
+                                    the position.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PREVIEW -->
+                <div class="bg-white border border-[#e4dfd8] rounded-3xl p-6">
+
+                    <div class="flex items-center justify-between mb-5">
+
+                        <h3 class="font-bold">
+                            Posting preview
+                        </h3>
+
+                        <span class="text-xs px-3 py-1.5 rounded-full bg-[#e9f9ef] text-[#159447] font-medium">
+                            Draft
+                        </span>
+
+                    </div>
+
+
+                    <div class="w-11 h-11 rounded-xl bg-[#fff0dc] flex items-center justify-center text-xl mb-4">
+                        💼
+                    </div>
+
+
+                    <h4 class="font-bold text-lg mb-1">
+                        Your job title
+                    </h4>
+
+                    <p class="text-sm text-[#77706a] mb-4">
+                        Company name
+                    </p>
+
+
+                    <div class="flex flex-wrap gap-2">
+
+                        <span class="text-xs px-3 py-1.5 rounded-full bg-[#f5f1ed] text-[#756c65]">
+                            Full-time
+                        </span>
+
+                        <span class="text-xs px-3 py-1.5 rounded-full bg-[#f5f1ed] text-[#756c65]">
+                            Remote
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
