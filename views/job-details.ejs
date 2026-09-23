@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        <%= jobs.title %> - JobFinder
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-[#fffaf5] text-stone-800">
+
+    <!-- Navbar -->
+    <nav class="border-b border-orange-100 bg-white/80 backdrop-blur">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <a href="/jobs" class="text-2xl font-bold text-orange-500">
+                JobFinder
+            </a>
+
+            <div class="flex items-center gap-6 text-sm font-medium">
+
+                <a href="/" class="text-stone-600 hover:text-orange-500 transition">
+                    Home
+                </a>
+
+                <a href="/jobs" class="text-stone-600 hover:text-orange-500 transition">
+                    Jobs
+                </a>
+
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- Main -->
+    <main class="max-w-6xl mx-auto px-6 py-10">
+
+        <!-- Back -->
+        <a href="/jobs" class="inline-flex items-center gap-2 text-sm font-semibold
+                  text-stone-500 hover:text-orange-500 transition">
+
+            ← Back to Jobs
+
+        </a>
+
+
+        <!-- Job Header -->
+        <section class="mt-6 bg-white border border-orange-100
+                        rounded-3xl shadow-sm overflow-hidden">
+
+            <div class="h-3 bg-gradient-to-r from-orange-500 to-amber-300"></div>
+
+            <div class="p-7 md:p-10">
+
+                <div class="flex flex-col md:flex-row md:items-start
+                            md:justify-between gap-6">
+
+                    <div class="flex items-start gap-5">
+
+                        <!-- Job Icon -->
+                        <div class="w-16 h-16 rounded-2xl bg-orange-100
+                                    flex items-center justify-center
+                                    text-orange-500 text-2xl font-bold shrink-0">
+
+                            <%= jobs.title ? jobs.title.charAt(0).toUpperCase() : "J" %>
+
+                        </div>
+
+
+                        <div>
+
+                            <!-- Title -->
+                            <h1 class="text-3xl md:text-4xl font-bold text-stone-900">
+                                <%= jobs.title %>
+                            </h1>
+
+
+                            <!-- Company -->
+                            <% if (jobs.company) { %>
+
+                                <p class="mt-2 text-lg font-semibold text-orange-500">
+                                    <%= jobs.company.companyName %>
+                                </p>
+
+                                <% } %>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Job Type -->
+                    <% if (jobs.jobType) { %>
+
+                        <span class="self-start px-4 py-2 rounded-full
+                                     bg-orange-50 text-orange-600
+                                     text-sm font-semibold">
+
+                            <%= jobs.jobType %>
+
+                        </span>
+
+                        <% } %>
+
+                </div>
+
+
+                <!-- Quick Info -->
+                <div class="flex flex-wrap gap-3 mt-8">
+
+                    <% if (jobs.location) { %>
+
+                        <div class="px-4 py-2 rounded-xl bg-stone-100
+                                    text-stone-600 text-sm">
+                            📍 <%= jobs.location %>
+                        </div>
+
+                        <% } %>
+
+
+                            <% if (jobs.workplace) { %>
+
+                                <div class="px-4 py-2 rounded-xl bg-stone-100
+                                    text-stone-600 text-sm">
+                                    💼 <%= jobs.workplace %>
+                                </div>
+
+                                <% } %>
+
+
+                                    <% if (jobs.category) { %>
+
+                                        <div class="px-4 py-2 rounded-xl bg-stone-100
+                                    text-stone-600 text-sm">
+                                            🏷️ <%= jobs.category %>
+                                        </div>
+
+                                        <% } %>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+
+
+            <!-- Left -->
+            <div class="lg:col-span-2 space-y-6">
+
+
+                <!-- Description -->
+                <section class="bg-white border border-orange-100
+                                rounded-3xl shadow-sm p-7 md:p-8">
+
+                    <h2 class="text-2xl font-bold text-stone-900 mb-5">
+                        Job Description
+                    </h2>
+
+                    <% if (jobs.description) { %>
+
+                        <p class="text-stone-600 leading-8 whitespace-pre-line">
+                            <%= jobs.description %>
+                        </p>
+
+                        <% } else { %>
+
+                            <p class="text-stone-400">
+                                No description provided.
+                            </p>
+
+                            <% } %>
+
+                </section>
+
+
+                <!-- Company -->
+                <% if (jobs.company) { %>
+
+                    <section class="bg-white border border-orange-100
+                                    rounded-3xl shadow-sm p-7 md:p-8">
+
+                        <h2 class="text-2xl font-bold text-stone-900 mb-6">
+                            About the Company
+                        </h2>
+
+                        <h3 class="text-xl font-bold text-orange-500">
+                            <%= jobs.company.companyName %>
+                        </h3>
+
+
+                        <% if (jobs.company.industry) { %>
+
+                            <p class="mt-2 text-stone-500">
+                                <%= jobs.company.industry %>
+                            </p>
+
+                            <% } %>
+
+
+                                <% if (jobs.company.description) { %>
+
+                                    <p class="mt-5 text-stone-600 leading-7">
+                                        <%= jobs.company.description %>
+                                    </p>
+
+                                    <% } %>
+
+                    </section>
+
+                    <% } %>
+
+            </div>
+
+
+            <!-- Right -->
+            <aside class="space-y-6">
+
+
+                <!-- Salary + Apply -->
+                <section class="bg-white border border-orange-100
+                rounded-3xl shadow-sm p-7">
+
+                    <h2 class="text-lg font-bold text-stone-900 mb-5">
+                        Salary
+                    </h2>
+
+                    <% if (jobs.salary) { %>
+
+                        <p class="text-2xl font-bold text-orange-500">
+
+                            Rs. <%= jobs.salary %>
+
+                                <% if (jobs.salaryMax) { %>
+                                    - Rs. <%= jobs.salaryMax %>
+                                        <% } %>
+
+                        </p>
+
+                        <% } else { %>
+
+                            <p class="text-stone-400">
+                                Salary not provided
+                            </p>
+
+                            <% } %>
+
+
+                                <!-- Apply Button -->
+                                <a href="/apply/<%= jobs._id %>" class="mt-6 block w-full text-center
+              px-5 py-3.5 rounded-xl
+              bg-orange-500 text-white
+              font-semibold
+              hover:bg-orange-600
+              transition">
+
+                                    Apply Now →
+
+                                </a>
+
+                </section>
+
+
+                <!-- Job Information -->
+                <section class="bg-white border border-orange-100
+                                rounded-3xl shadow-sm p-7">
+
+                    <h2 class="text-lg font-bold text-stone-900 mb-6">
+                        Job Information
+                    </h2>
+
+
+                    <div class="space-y-5">
+
+
+                        <% if (jobs.jobType) { %>
+
+                            <div>
+
+                                <p class="text-xs uppercase tracking-wider
+                                          font-semibold text-stone-400">
+                                    Job Type
+                                </p>
+
+                                <p class="mt-1 font-semibold">
+                                    <%= jobs.jobType %>
+                                </p>
+
+                            </div>
+
+                            <% } %>
+
+
+                                <% if (jobs.workplace) { %>
+
+                                    <div>
+
+                                        <p class="text-xs uppercase tracking-wider
+                                          font-semibold text-stone-400">
+                                            Workplace
+                                        </p>
+
+                                        <p class="mt-1 font-semibold">
+                                            <%= jobs.workplace %>
+                                        </p>
+
+                                    </div>
+
+                                    <% } %>
+
+
+                                        <% if (jobs.category) { %>
+
+                                            <div>
+
+                                                <p class="text-xs uppercase tracking-wider
+                                          font-semibold text-stone-400">
+                                                    Category
+                                                </p>
+
+                                                <p class="mt-1 font-semibold">
+                                                    <%= jobs.category %>
+                                                </p>
+
+                                            </div>
+
+                                            <% } %>
+
+
+                                                <% if (jobs.location) { %>
+
+                                                    <div>
+
+                                                        <p class="text-xs uppercase tracking-wider
+                                          font-semibold text-stone-400">
+                                                            Location
+                                                        </p>
+
+                                                        <p class="mt-1 font-semibold">
+                                                            <%= jobs.location %>
+                                                        </p>
+
+                                                    </div>
+
+                                                    <% } %>
+
+
+                                                        <% if (jobs.createdAt) { %>
+
+                                                            <div>
+
+                                                                <p class="text-xs uppercase tracking-wider
+                                          font-semibold text-stone-400">
+                                                                    Posted
+                                                                </p>
+
+                                                                <p class="mt-1 font-semibold">
+                                                                    <%= new Date(jobs.createdAt).toLocaleDateString() %>
+                                                                </p>
+
+                                                            </div>
+
+                                                            <% } %>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Company Location -->
+                <% if (jobs.company && jobs.company.location) { %>
+
+                    <section class="bg-white border border-orange-100
+                                    rounded-3xl shadow-sm p-7">
+
+                        <h2 class="text-lg font-bold text-stone-900 mb-4">
+                            Company Location
+                        </h2>
+
+                        <p class="text-stone-600">
+                            📍 <%= jobs.company.location %>
+                        </p>
+
+                    </section>
+
+                    <% } %>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

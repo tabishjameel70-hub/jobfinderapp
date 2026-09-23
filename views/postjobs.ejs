@@ -150,10 +150,8 @@
                                 Location
                             </label>
 
-                            <input type="text" name="location" value="<%= recruiter.location %>" disabled
-                                class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]"
-                                required>
-
+                            <input type="text" name="location" value="<%= recruiter.location %>" readonly
+                                class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#f5f2ee] outline-none">
                         </div>
 
                     </div>
@@ -255,12 +253,11 @@
 
                         <div class="grid md:grid-cols-2 gap-4">
 
-                            <input type="text" name="salaryMin" placeholder="Minimum salary"
+                            <input type="number" name="salary" placeholder="Minimum salary"
                                 class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]">
 
-                            <input type="text" name="salaryMax" placeholder="Maximum salary"
+                            <input type="number" name="salaryMax" placeholder="Maximum salary"
                                 class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10 placeholder:text-[#aaa19a]">
-
                         </div>
 
                     </div>

@@ -4,6 +4,7 @@ const path = require('path');
 const userModel = require('./models/user');
 const postjobsModel = require('./models/postjobs');
 const recruiterModel = require('./models/recruiter');
+const ApplyModel = require('./models/apply');
 const companyModel = require('./models/company');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +22,7 @@ const port = 3000;
 app.get('/', isLoggined, checkPassion, async (req, res) => {
     try {
         const user = await userModel.findOne({ email: req.user.email });
-        const jobs = await postjobsModel.find().populate('Jobs').sort({ createdAt: -1 });
+        const jobs = await postjobsModel.find().populate('recruiter').populate('company').sort({ createdAt: -1 });
         res.render('home', { user, jobs });
     } catch (error) {
         console.error(error);
@@ -29,41 +30,58 @@ app.get('/', isLoggined, checkPassion, async (req, res) => {
     }
 });
 app.get('/candidates', isLoggined, async (req, res) => {
-    const candidates = await userModel.findOne({ email: req.user.email });
+    const candidates = await userModel.find({
+        role: 'user'
+    });
     console.log(candidates);
-    res.render('candidates',{candidates})
+    res.render('candidates', { candidates });
+});
+app.get('/candidates/:id', async (req, res) => {
+    try {
+        // 1. Grab the ID from the URL parameters using req.params
+        const candidate = await userModel.findOne({ _id: req.params.id });
+
+        if (!candidate) {
+            return res.status(404).send("Candidate not found");
+        }
+
+        // 2. Pass the template name and the candidate data to res.render()
+        res.render('candidateProfile', { candidate: candidate });
+
+    } catch (error) {
+        res.status(500).send("Server Error");
+    }
 })
 app.get('/user/profile', isLoggined, async (req, res) => {
     const user = await userModel.findOne({ email: req.user.email });
     console.log(user);
-    res.render('candidate-profile',{ user})
+    res.render('candidate-profile', { user })
 })
 app.get('/signup', async (req, res) => {
     res.render('signup');
 })
-// Add your authentication middleware function here (e.g., isLoggedIn)
 app.get("/recruiter-home", isLoggined, async (req, res) => {
     try {
-        // 1. Fetch all jobs posted by this specific recruiter
         const jobs = await postjobsModel
             .find({ recruiter: req.user._id })
+            .populate("recruiter")
+            .populate("company")
             .sort({ createdAt: -1 });
 
-        // 2. Fetch the company profile data
-        const recruiter = await companyModel.findOne({ recruiter: req.user._id });
+        const recruiter = await companyModel.findOne({
+            recruiter: req.user._id
+        });
 
-        // 3. Render and provide an empty object fallback if no company profile exists yet
         res.render("recruiter", {
             jobs,
-            recruiter: recruiter,
+            recruiter
         });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Failed to load the feed");
+        console.error("Recruiter home error:", error);
+        res.status(500).send("Failed to load recruiter dashboard");
     }
 });
-
 app.post('/signup', (req, res) => {
     const { username, email, password } = req.body;
     bcrypt.genSalt(10, function (err, salt) {
@@ -148,9 +166,10 @@ app.get('/post-job', isLoggined, async (req, res) => {
     res.render('postjobs', { recruiter });
 })
 app.post('/post-job', isLoggined, async (req, res) => {
+
     try {
+
         const {
-            firmName,
             title,
             jobType,
             location,
@@ -159,9 +178,11 @@ app.post('/post-job', isLoggined, async (req, res) => {
             salary,
             salaryMax,
             description,
+            requirements
         } = req.body;
 
-        // Find company of logged-in recruiter
+
+        // Find logged-in recruiter's company
         const company = await companyModel.findOne({
             recruiter: req.user._id
         });
@@ -169,38 +190,47 @@ app.post('/post-job', isLoggined, async (req, res) => {
         if (!company) {
             return res.status(404).send("Company profile not found.");
         }
-
         // Create job
         const createPost = await postjobsModel.create({
-            firmName,
+            // Company name comes directly from company model
+            firmName: company.companyName,
+
             title,
+
             jobType,
+
             location,
+
             category,
+
             workplace,
-            salary,
-            salaryMax,
+
+            salary: Number(salary),
+
+            salaryMax: Number(salaryMax),
+
             description,
+
+            requirements,
 
             recruiter: req.user._id,
 
-            // Connect job with company
             company: company._id
+
         });
-
         console.log(createPost);
-
         res.redirect('/recruiter-home');
 
     } catch (error) {
         console.error("Error posting job:", error);
         res.status(500).send("Error posting job.");
     }
+
 });
 app.get('/jobDetails', async (req, res) => {
     try {
         //  Added "await" here to get the actual array
-        const jobs = await postjobsModel.find().populate('recruiter').sort({ createdAt: -1 });
+        const jobs = await postjobsModel.find().populate('recruiter').populate('company').sort({ createdAt: -1 });
 
         res.render('jobDetails', { jobs });
     } catch (error) {
@@ -239,10 +269,43 @@ app.get('/profile', isLoggined, async (req, res) => {
     res.render('recruiter-profile', { recruiter });
 })
 app.get('/jobs', isLoggined, async (req, res) => {
-    const jobs = await postjobsModel.find().populate('Jobs').sort({ createdAt: -1 });
-    console.log(jobs)
+
+    const jobs = await postjobsModel
+        .find()
+        .populate('company')
+        .sort({ createdAt: -1 });
+
+    console.log(jobs);
+
     res.render('jobs', { jobs });
+
+});
+app.get('/jobs/:id', isLoggined, async (req, res) => {
+
+    const jobs = await postjobsModel
+        .findById(req.params.id)
+        .populate('company');
+
+    console.log(jobs);
+
+    res.render('job-details', { jobs });
+
+});
+app.get('/myjobs', isLoggined, async (req, res) => {
+    const jobs = await postjobsModel.find({ recruiter: req.user._id }).populate('recruiter').populate('company').sort({ createdAt: -1 });
+    console.log(jobs)
+    res.render("my-jobs", { jobs });
 })
+app.get('/see-details/:id', isLoggined, async (req, res) => {
+    const jobs = await postjobsModel.findById(req.params.id).populate('recruiter').populate('company').sort({ createdAt: -1 });
+    console.log(jobs)
+    res.render("see-details", { jobs });
+})
+app.get('/apply/:id', isLoggined, async (req, res) => {
+    const jobs = await postjobsModel.findById(req.params.id).populate('recruiter').populate('company')
+    res.render('apply', { jobs });
+})
+
 function isRecruiterLoggedIn(req, res, next) {
 
     const token = req.cookies.token;

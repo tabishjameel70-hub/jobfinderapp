@@ -24,12 +24,9 @@ const companySchema = mongoose.Schema({
         type: String,
         required: true
     },
-
     location: {
-        type: String,
-        required: true
+        type: String
     },
-
     website: {
         type: String
     },
@@ -37,6 +34,12 @@ const companySchema = mongoose.Schema({
     recruiterName: {
         type: String,
         required: true
+    },
+    salary: {
+        type: Number
+    },
+    salaryMax: {
+        type: Number
     },
 
     position: {

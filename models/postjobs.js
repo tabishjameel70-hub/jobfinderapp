@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
-
 const postJobSchema = mongoose.Schema({
-   recruiter: {
+
+    recruiter: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'recruiter'
+        ref: 'user'
+    },
+
+    firmName: {
+        type: String
     },
 
     title: {
-        type: String,
+        type: String
     },
 
     location: {
@@ -38,17 +42,18 @@ const postJobSchema = mongoose.Schema({
         type: String
     },
 
+    requirements: {
+        type: String
+    },
+
     company: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'company',
         required: true
-    },
-    Jobs: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'recruiter'
-        }
-    ],
-}, { timestamps: true });
+    }
+
+}, {
+    timestamps: true
+});
 
 module.exports = mongoose.model('postjobs', postJobSchema);

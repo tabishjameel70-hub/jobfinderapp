@@ -31,7 +31,7 @@
             <div class="flex items-center gap-4">
 
                 <span class="hidden sm:block text-sm text-stone-500">
-                    <%= recruiter.recruiterName %>
+                    <%= recruiter?.recruiterName || 'Guest Recruiter' %>
                 </span>
 
                 <div class="w-10 h-10 rounded-full bg-stone-900
@@ -249,7 +249,7 @@
                         </h3>
                     </div>
 
-                    <a href="/jobs" class="text-sm font-semibold text-stone-600
+                    <a href="/myjobs" class="text-sm font-semibold text-stone-600
                       hover:text-orange-600 transition">
                         View all →
                     </a>
@@ -258,56 +258,133 @@
 
 
                 <!-- Dynamic Jobs -->
+                <% if (jobs && jobs.length> 0) { %>
 
-                <% jobs.forEach(job=> { %>
+                    <% jobs.forEach(job=> { %>
 
-                    <div class="border border-stone-200
-                        rounded-2xl p-5 mb-4
-                        hover:border-orange-200
-                        transition">
+                        <div class="border border-stone-200 rounded-2xl p-5 mb-4 hover:border-orange-200 transition">
 
-                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex items-start justify-between gap-4">
 
-                            <div class="flex gap-4">
+                                <div class="flex gap-4">
 
-                                <div class="w-12 h-12 rounded-xl
-                                    bg-orange-100
-                                    flex items-center justify-center
-                                    text-orange-600 text-xl">
-                                    💼
+                                    <!-- Icon -->
+                                    <div class="w-12 h-12 rounded-xl
+                                bg-orange-100
+                                flex items-center justify-center
+                                text-orange-600 text-xl shrink-0">
+                                        💼
+                                    </div>
+
+                                    <!-- Job Info -->
+                                    <div>
+
+                                        <!-- Company -->
+                                        <p class="text-sm text-stone-500 mt-1">
+                                            <%= job.company?.companyName || job.firmName || "Company not provided" %>
+                                        </p>
+
+                                        <!-- Job Title -->
+                                        <h4 class="font-bold text-lg">
+                                            <%= job.title || "Job title not provided" %>
+                                        </h4>
+
+                                        <!-- Location + Job Type -->
+                                        <p class="text-sm text-stone-500 mt-1">
+                                            <%= job.location || "Location not provided" %>
+                                                ·
+                                                <%= job.jobType || "Job type not provided" %>
+                                        </p>
+
+                                        <!-- Salary -->
+                                        <p class="text-sm text-orange-600 font-semibold mt-2">
+
+                                            <% if (job.salary && job.salaryMax) { %>
+
+                                                Rs. <%= Number(job.salary).toLocaleString() %>
+                                                    -
+                                                    Rs. <%= Number(job.salaryMax).toLocaleString() %>
+
+                                                        <% } else if (job.salary) { %>
+
+                                                            Rs. <%= Number(job.salary).toLocaleString() %>
+
+                                                                <% } else { %>
+
+                                                                    Salary not provided
+
+                                                                    <% } %>
+
+                                        </p>
+
+                                        <!-- Workplace -->
+                                        <% if (job.workplace) { %>
+                                            <p class="text-xs text-stone-400 mt-1 capitalize">
+                                                <%= job.workplace %>
+                                            </p>
+                                            <% } %>
+
+                                    </div>
+
                                 </div>
 
-                                <div>
 
-                                    <p class="text-sm text-stone-500 mt-1">
-                                        <%= job.firmName %>
-                                    </p>
-
-                                    <h4 class="font-bold text-lg">
-                                        <%= job.title %>
-                                    </h4>
-
-                                    <p class="text-sm text-stone-500 mt-1">
-                                        <%= job.location %> · <%= job.jobType %>
-                                    </p>
-                                    <a href="/jobDetails">see details</a>
-                                </div>
+                                <!-- Status -->
+                                <span class="px-3 py-1 rounded-full
+                             bg-green-100 text-green-700
+                             text-xs font-semibold shrink-0">
+                                    Active
+                                </span>
 
                             </div>
 
 
-                            <span class="px-3 py-1 rounded-full
-                                 bg-green-100 text-green-700
-                                 text-xs font-semibold">
-                                Active
-                            </span>
+                            <!-- Bottom -->
+                            <div class="mt-4 pt-4 border-t border-stone-100 flex items-center justify-between">
+
+                                <span class="text-xs text-stone-400">
+                                    Posted
+                                    <%= job.createdAt ? new Date(job.createdAt).toLocaleDateString() : "Recently" %>
+                                </span>
+
+                                <a href="/see-details/<%= job._id %>"
+                                    class="text-sm font-semibold text-orange-600 hover:text-orange-700">
+                                    See details →
+                                </a>
+
+                            </div>
 
                         </div>
 
-                    </div>
+                        <% }) %>
 
-                    <% }) %>
+                            <% } else { %>
 
+                                <!-- No Jobs -->
+                                <div class="border border-dashed border-stone-300 rounded-2xl p-10 text-center">
+
+                                    <div class="text-4xl mb-4">
+                                        💼
+                                    </div>
+
+                                    <h4 class="font-bold text-lg">
+                                        No jobs posted yet
+                                    </h4>
+
+                                    <p class="text-stone-500 text-sm mt-2">
+                                        Create your first job posting to start finding candidates.
+                                    </p>
+
+                                    <a href="/post-job" class="inline-flex mt-5 px-5 py-3
+                  bg-orange-500 hover:bg-orange-600
+                  text-white rounded-xl
+                  font-semibold transition">
+                                        Post your first job
+                                    </a>
+
+                                </div>
+
+                                <% } %>
             </div>
 
 
