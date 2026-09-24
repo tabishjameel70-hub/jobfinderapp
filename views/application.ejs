@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Applications | JobFinder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="min-h-screen bg-[#fffaf5] text-stone-800"
+    style="font-family: 'Plus Jakarta Sans', sans-serif;">
+
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-stone-200">
+
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <a href="/" class="text-2xl font-extrabold text-orange-500">
+                JobFinder
+            </a>
+
+            <div class="flex items-center gap-6">
+
+                <a href="/recruiter-home"
+                    class="text-sm font-semibold text-stone-600 hover:text-orange-500">
+                    Dashboard
+                </a>
+
+                <a href="/profile"
+                    class="text-sm font-semibold text-stone-600 hover:text-orange-500">
+                    Profile
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Main -->
+    <main class="max-w-7xl mx-auto px-6 py-10">
+
+
+        <!-- Header -->
+        <div class="mb-8">
+
+            <p class="text-orange-500 font-bold text-sm uppercase tracking-widest">
+                Recruiter
+            </p>
+
+            <h1 class="text-4xl font-extrabold text-stone-900 mt-2">
+                Applications
+            </h1>
+
+            <p class="text-stone-500 mt-2">
+                Review candidates who have applied to your jobs.
+            </p>
+
+        </div>
+
+
+        <!-- Application Count -->
+        <div class="bg-white border border-stone-200 rounded-2xl
+                    p-6 mb-8">
+
+            <div class="flex items-center gap-4">
+
+                <div class="w-12 h-12 rounded-xl bg-orange-100
+                            flex items-center justify-center">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-6 h-6 text-orange-500"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2">
+
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
+
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <p class="text-sm text-stone-500">
+                        Total Applications
+                    </p>
+
+                    <h2 class="text-2xl font-extrabold text-stone-900">
+                        <%= applications.length %>
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Applications -->
+        <div class="space-y-6">
+
+            <% if (applications.length === 0) { %>
+
+                <!-- Empty State -->
+                <div class="bg-white border border-stone-200
+                            rounded-2xl p-12 text-center">
+
+                    <div class="w-16 h-16 mx-auto rounded-full
+                                bg-orange-100 flex items-center justify-center">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="w-8 h-8 text-orange-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2">
+
+                            <path stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+
+                        </svg>
+
+                    </div>
+
+                    <h2 class="mt-5 text-xl font-bold text-stone-900">
+                        No applications yet
+                    </h2>
+
+                    <p class="mt-2 text-stone-500">
+                        Candidates who apply to your jobs will appear here.
+                    </p>
+
+                </div>
+
+            <% } %>
+
+
+            <% applications.forEach(application => { %>
+
+                <!-- Application Card -->
+                <div class="bg-white border border-stone-200
+                            rounded-2xl p-6 shadow-sm">
+
+                    <div class="flex flex-col lg:flex-row
+                                lg:items-start lg:justify-between gap-6">
+
+
+                        <!-- Candidate -->
+                        <div class="flex gap-4">
+
+                            <!-- Avatar -->
+                            <div class="w-14 h-14 rounded-full
+                                        bg-orange-100 flex items-center
+                                        justify-center shrink-0">
+
+                                <span class="text-orange-600
+                                             font-extrabold text-lg">
+
+                                    <%= application.name
+                                        ? application.name.charAt(0).toUpperCase()
+                                        : 'U' %>
+
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <h2 class="text-xl font-extrabold text-stone-900">
+                                    <%= application.name %>
+                                </h2>
+
+                                <p class="text-sm text-stone-500 mt-1">
+                                    <%= application.email %>
+                                </p>
+
+                                <p class="text-sm text-stone-500 mt-1">
+                                    <%= application.phone %>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Status -->
+                        <div>
+
+                            <% if (application.status === 'Accepted') { %>
+
+                                <span class="inline-flex px-3 py-1.5 rounded-full
+                                             text-xs font-bold
+                                             bg-green-100 text-green-700">
+                                    Accepted
+                                </span>
+
+                            <% } else if (application.status === 'Rejected') { %>
+
+                                <span class="inline-flex px-3 py-1.5 rounded-full
+                                             text-xs font-bold
+                                             bg-red-100 text-red-700">
+                                    Rejected
+                                </span>
+
+                            <% } else { %>
+
+                                <span class="inline-flex px-3 py-1.5 rounded-full
+                                             text-xs font-bold
+                                             bg-yellow-100 text-yellow-700">
+                                    Pending
+                                </span>
+
+                            <% } %>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Job -->
+                    <div class="mt-6 pt-5 border-t border-stone-200">
+
+                        <p class="text-xs font-bold uppercase
+                                  tracking-wider text-stone-400">
+                            Applied For
+                        </p>
+
+                        <h3 class="mt-1 font-bold text-stone-900">
+
+                            <%= application.job
+                                ? application.job.title
+                                : 'Job' %>
+
+                        </h3>
+
+                    </div>
+
+
+                    <!-- Cover Letter -->
+                    <% if (application.coverLetter) { %>
+
+                    <div class="mt-5">
+
+                        <p class="text-xs font-bold uppercase
+                                  tracking-wider text-stone-400">
+                            Cover Letter
+                        </p>
+
+                        <p class="mt-2 text-sm text-stone-600 leading-6">
+                            <%= application.coverLetter %>
+                        </p>
+
+                    </div>
+
+                    <% } %>
+
+
+                    <!-- Actions -->
+                    <div class="mt-6 pt-5 border-t border-stone-200
+                                flex flex-wrap gap-3">
+
+                        <a href="/candidate/<%= application.applicant._id %>"
+                            class="px-5 py-2.5 rounded-xl bg-orange-500
+                                   text-white text-sm font-bold
+                                   hover:bg-orange-600 transition">
+
+                            View Candidate
+
+                        </a>
+
+
+                        <% if (application.resume) { %>
+
+                        <a href="<%= application.resume %>"
+                            target="_blank"
+                            class="px-5 py-2.5 rounded-xl border
+                                   border-stone-300 bg-white
+                                   text-stone-700 text-sm font-bold
+                                   hover:bg-stone-50 transition">
+
+                            View Resume
+
+                        </a>
+
+                        <% } %>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

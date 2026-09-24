@@ -14,5 +14,9 @@ const userSchema = mongoose.Schema({
   enum: ['user', 'admin', 'recruiter'],
   default: null
   },
+  applications:{
+    type: String,
+    deafault: null,
+  }
 });
 module.exports = mongoose.model('user', userSchema);

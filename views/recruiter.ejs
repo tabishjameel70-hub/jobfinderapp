@@ -130,100 +130,89 @@
             </div>
 
 
+            <% applications.forEach(application=> {%>
+                <!-- Applications -->
+                <div class="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-5">
+                        <p class="text-sm text-stone-500">Applications</p>
+                        <div
+                            class="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center">
+                            📄
+                        </div>
+                    </div>
+                    <h3 class="text-3xl font-bold">
+                        <%= applications.length %>
+                    </h3>
+                    <p class="text-sm text-green-600 mt-2">
+                        +18% this month
+                    </p>
+                </div>
+                <%}); %>
 
-            <!-- Applications -->
-            <div class="bg-white border border-stone-200
+
+
+
+                    <!-- Candidates -->
+                    <div class="bg-white border border-stone-200
                         rounded-2xl p-6 shadow-sm">
 
-                <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center justify-between mb-5">
 
-                    <p class="text-sm text-stone-500">
-                        Applications
-                    </p>
+                            <a href="/candidates" class="text-sm text-stone-500">
+                                Candidates
+                            </a>
 
-                    <div class="w-10 h-10 rounded-xl
+                            <div class="w-10 h-10 rounded-xl
                                 bg-orange-100 text-orange-600
                                 flex items-center justify-center">
 
-                        📄
+                                👥
+
+                            </div>
+
+                        </div>
+
+                        <h3 class="text-3xl font-bold">
+                            42
+                        </h3>
+
+                        <p class="text-sm text-stone-500 mt-2">
+                            In review
+                        </p>
 
                     </div>
 
-                </div>
-
-                <h3 class="text-3xl font-bold">
-                    86
-                </h3>
-
-                <p class="text-sm text-green-600 mt-2">
-                    +18% this month
-                </p>
-
-            </div>
 
 
-
-            <!-- Candidates -->
-            <div class="bg-white border border-stone-200
+                    <!-- Interviews -->
+                    <div class="bg-[#292524] text-white
                         rounded-2xl p-6 shadow-sm">
 
-                <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center justify-between mb-5">
 
-                    <a href="/candidates" class="text-sm text-stone-500">
-                        Candidates
-                    </a>
+                            <p class="text-sm text-stone-400">
+                                Interviews
+                            </p>
 
-                    <div class="w-10 h-10 rounded-xl
-                                bg-orange-100 text-orange-600
-                                flex items-center justify-center">
-
-                        👥
-
-                    </div>
-
-                </div>
-
-                <h3 class="text-3xl font-bold">
-                    42
-                </h3>
-
-                <p class="text-sm text-stone-500 mt-2">
-                    In review
-                </p>
-
-            </div>
-
-
-
-            <!-- Interviews -->
-            <div class="bg-[#292524] text-white
-                        rounded-2xl p-6 shadow-sm">
-
-                <div class="flex items-center justify-between mb-5">
-
-                    <p class="text-sm text-stone-400">
-                        Interviews
-                    </p>
-
-                    <div class="w-10 h-10 rounded-xl
+                            <div class="w-10 h-10 rounded-xl
                                 bg-orange-500/15 text-orange-400
                                 flex items-center justify-center">
 
-                        ✓
+                                ✓
+
+                            </div>
+
+                        </div>
+
+                        <h3 class="text-3xl font-bold">
+                            8
+                        </h3>
+
+                        <p class="text-sm text-orange-400 mt-2">
+                            Scheduled this week
+                        </p>
 
                     </div>
-
-                </div>
-
-                <h3 class="text-3xl font-bold">
-                    8
-                </h3>
-
-                <p class="text-sm text-orange-400 mt-2">
-                    Scheduled this week
-                </p>
-
-            </div>
         </div>
 
 

@@ -17,13 +17,42 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const recruiter = require('./models/recruiter');
 const { asyncWrapProviders } = require('async_hooks');
+const user = require('./models/user');
 const JWT = '123erwvdghlkyrtadeg##########jfrge478945645';
 const port = 3000;
 app.get('/', isLoggined, checkPassion, async (req, res) => {
     try {
-        const user = await userModel.findOne({ email: req.user.email });
-        const jobs = await postjobsModel.find().populate('recruiter').populate('company').sort({ createdAt: -1 });
-        res.render('home', { user, jobs });
+
+        const user = await userModel.findOne({
+            email: req.user.email
+        });
+
+        // Get all jobs for homepage
+        const jobs = await postjobsModel
+            .find()
+            .populate('recruiter')
+            .populate('company')
+            .sort({ createdAt: -1 });
+
+        // Get only this recruiter's jobs
+        const recruiterJobs = await postjobsModel.find({
+            recruiter: req.user._id
+        });
+
+        // Get IDs of those jobs
+        const jobIds = recruiterJobs.map(job => job._id);
+
+        // Get all applications for those jobs
+        const applications = await ApplyModel.find({
+            job: { $in: jobIds }
+        });
+
+        res.render('home', {
+            user,
+            jobs,
+            applications
+        });
+
     } catch (error) {
         console.error(error);
         res.status(500).send("Something went wrong loading the homepage");
@@ -62,24 +91,45 @@ app.get('/signup', async (req, res) => {
 })
 app.get("/recruiter-home", isLoggined, async (req, res) => {
     try {
+
+        // Get this recruiter's jobs
         const jobs = await postjobsModel
             .find({ recruiter: req.user._id })
             .populate("recruiter")
             .populate("company")
             .sort({ createdAt: -1 });
 
+
+        // Get recruiter's company information
         const recruiter = await companyModel.findOne({
             recruiter: req.user._id
         });
 
+
+        // Take only the IDs of this recruiter's jobs
+        const jobIds = jobs.map(job => job._id);
+
+
+        // Find ALL applications submitted to those jobs
+        const applications = await ApplyModel.find({
+            job: { $in: jobIds }
+        })
+            .populate("job")
+            .populate("applicant");
+
+
+        // Send everything to recruiter.ejs
         res.render("recruiter", {
             jobs,
-            recruiter
+            recruiter,
+            applications
         });
 
     } catch (error) {
+
         console.error("Recruiter home error:", error);
         res.status(500).send("Failed to load recruiter dashboard");
+
     }
 });
 app.post('/signup', (req, res) => {
@@ -305,7 +355,50 @@ app.get('/apply/:id', isLoggined, async (req, res) => {
     const jobs = await postjobsModel.findById(req.params.id).populate('recruiter').populate('company')
     res.render('apply', { jobs });
 })
+app.post('/apply/:id', isLoggined, async (req, res) => {
 
+    const {
+        name,
+        email,
+        phone,
+        resume,
+        coverLetter
+    } = req.body;
+
+    const application = await ApplyModel.create({
+        applicant: req.user._id,
+        job: req.params.id,
+        name,
+        email,
+        phone,
+        resume,
+        coverLetter,
+        status: 'Pending'
+    });
+    console.log(application)
+    res.redirect('/application-success');
+});
+app.get('/applications', isLoggined, async (req, res) => {
+
+    const jobs = await postjobsModel.find({
+        recruiter: req.user._id
+    });
+
+    const jobIds = jobs.map(job => job._id);
+
+    const applications = await ApplyModel.find({
+        job: { $in: jobIds }
+    })
+        .populate('job')
+        .populate('applicant');
+
+    res.render('application', { applications });
+
+});
+app.get('/application-success', isLoggined, async (req, res) => {
+    const application = await ApplyModel.findOne({ email: req.user.email })
+    res.render('application-success', { application })
+})
 function isRecruiterLoggedIn(req, res, next) {
 
     const token = req.cookies.token;
