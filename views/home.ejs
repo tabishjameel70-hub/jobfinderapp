@@ -120,7 +120,7 @@
                 </a>
 
 
-                <a href="#"
+                <a href="/messages"
                     class="flex items-center px-4 py-3 text-stone-500 hover:bg-stone-50 hover:text-stone-900 rounded-xl font-medium text-sm transition-colors">
 
                     <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -131,7 +131,7 @@
 
                     </svg>
 
-                    Interviews
+                   Messages
 
                 </a>
 
@@ -225,45 +225,45 @@
             <!-- Stats -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
 
-        <div class="bg-white p-5 rounded-[1.5rem] border border-stone-100 shadow-sm">
+                <div class="bg-white p-5 rounded-[1.5rem] border border-stone-100 shadow-sm">
 
-    <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center text-stone-600 mb-4">
-        📄
-    </div>
+                    <div class="w-10 h-10 rounded-xl bg-stone-50 flex items-center justify-center text-stone-600 mb-4">
+                        📄
+                    </div>
 
-    <p class="text-stone-500 text-sm font-medium">
-        Total Applied
-    </p>
+                    <p class="text-stone-500 text-sm font-medium">
+                        Total Applied
+                    </p>
 
-    <p class="text-3xl font-bold text-stone-900 mt-1">
-        <%= applications.length %>
-    </p>
+                    <p class="text-3xl font-bold text-stone-900 mt-1">
+                        <%= applications.length %>
+                    </p>
 
-</div>
+                </div>
 
 
 
-                    <!-- Interviewing -->
-                    <div class="bg-white p-5 rounded-[1.5rem] border border-stone-100 shadow-sm">
+                <!-- Interviewing -->
+                <div class="bg-white p-5 rounded-[1.5rem] border border-stone-100 shadow-sm">
 
-                        <div
-                            class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 mb-4">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 mb-4">
 
-                            📍
-
-                        </div>
-
-                        <p class="text-stone-500 text-sm font-medium">
-                            Interviewing
-                        </p>
-
-                        <p class="text-3xl font-bold text-stone-900 mt-1">
-                            6
-                        </p>
+                        📍
 
                     </div>
 
+                    <p class="text-stone-500 text-sm font-medium">
+                        Interviewing
+                    </p>
 
+                    <p class="text-3xl font-bold text-stone-900 mt-1">
+                        6
+                    </p>
+
+                </div>
+
+       
                     <!-- Offers -->
                     <div class="bg-white p-5 rounded-[1.5rem] border border-stone-100 shadow-sm">
 
@@ -279,10 +279,12 @@
                         </p>
 
                         <p class="text-3xl font-bold text-stone-900 mt-1">
-                            2
+                          <%= applications.filter(app => app.status === 'Pending').length %>
                         </p>
 
                     </div>
+            
+
 
 
                     <!-- Rejected -->
@@ -299,7 +301,7 @@
                         </p>
 
                         <p class="text-3xl font-bold text-stone-900 mt-1">
-                            14
+                            <%= applications.filter(app=> app.status ===  'Rejected').length  %>
                         </p>
 
                     </div>
@@ -348,7 +350,7 @@
                                 </th>
 
 
-                       
+
 
                             </tr>
 
@@ -413,7 +415,7 @@
                                         </td>
 
 
-                                  
+
 
                                     </tr>
 

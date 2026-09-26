@@ -98,38 +98,6 @@
         <!-- Stats -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
 
-
-            <!-- Active Jobs -->
-            <div class="bg-white border border-stone-200
-                        rounded-2xl p-6 shadow-sm">
-
-                <div class="flex items-center justify-between mb-5">
-
-                    <p class="text-sm text-stone-500">
-                        Active Jobs
-                    </p>
-
-                    <div class="w-10 h-10 rounded-xl
-                                bg-orange-100 text-orange-600
-                                flex items-center justify-center">
-
-                        💼
-
-                    </div>
-
-                </div>
-
-                <h3 class="text-3xl font-bold">
-                    12
-                </h3>
-
-                <p class="text-sm text-green-600 mt-2">
-                    +3 this month
-                </p>
-
-            </div>
-
-
             <% applications.forEach(application=> {%>
                 <!-- Applications -->
                 <div class="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
@@ -151,36 +119,22 @@
 
 
 
-
-                    <!-- Candidates -->
-                    <div class="bg-white border border-stone-200
-                        rounded-2xl p-6 shadow-sm">
-
+                    <!-- Candidates Total Count Card -->
+                    <div class="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
                         <div class="flex items-center justify-between mb-5">
-
-                            <a href="/candidates" class="text-sm text-stone-500">
-                                Candidates
-                            </a>
-
-                            <div class="w-10 h-10 rounded-xl
-                                bg-orange-100 text-orange-600
-                                flex items-center justify-center">
-
+                            <a href="/candidates" class="text-sm text-stone-500"> Candidates </a>
+                            <div
+                                class="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center">
                                 👥
-
                             </div>
-
                         </div>
-
+                        <!-- Directly print the total length of the array passed from res.render -->
                         <h3 class="text-3xl font-bold">
-                            42
+                            <%= candidates.length %>
                         </h3>
-
-                        <p class="text-sm text-stone-500 mt-2">
-                            In review
-                        </p>
-
+                        <p class="text-sm text-stone-500 mt-2"> In review </p>
                     </div>
+
 
 
 

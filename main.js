@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const userModel = require('./models/user');
 const postjobsModel = require('./models/postjobs');
+const messageModel = require('./models/message');
 const recruiterModel = require('./models/recruiter');
 const ApplyModel = require('./models/apply');
 const companyModel = require('./models/company');
@@ -12,6 +13,7 @@ app.use(express.static(path.join('public')));
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.set('view engine', 'ejs');
+const multer = require('multer');
 app.set('views', path.join('views'));
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -20,32 +22,46 @@ const { asyncWrapProviders } = require('async_hooks');
 const user = require('./models/user');
 const JWT = '123erwvdghlkyrtadeg##########jfrge478945645';
 const port = 3000;
-app.get('/', isLoggined, checkPassion, async (req, res) => {
+const storage = multer.diskStorage({
+
+    destination: function (req, file, cb) {
+        cb(null, 'public/uploads/resumes');
+    },
+
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+
+});
+
+const upload = multer({
+    storage: storage
+});
+app.get('/', isLoggined, onlyUser, async (req, res) => {
     try {
 
         const user = await userModel.findOne({
             email: req.user.email
         });
 
-        // Get all jobs for homepage
+        // Get all jobs
         const jobs = await postjobsModel
             .find()
             .populate('recruiter')
             .populate('company')
             .sort({ createdAt: -1 });
 
-        // Get only this recruiter's jobs
-        const recruiterJobs = await postjobsModel.find({
-            recruiter: req.user._id
-        });
+        // If recruiter, send them to recruiter dashboard
+        if (req.user.role === 'recruiter') {
+            return res.redirect('/recruiter-home');
+        }
 
-        // Get IDs of those jobs
-        const jobIds = recruiterJobs.map(job => job._id);
-
-        // Get all applications for those jobs
+        // Get applications submitted by THIS user
         const applications = await ApplyModel.find({
-            job: { $in: jobIds }
-        });
+            applicant: req.user._id
+        })
+            .populate('job')
+            .populate('applicant');
 
         res.render('home', {
             user,
@@ -57,7 +73,7 @@ app.get('/', isLoggined, checkPassion, async (req, res) => {
         console.error(error);
         res.status(500).send("Something went wrong loading the homepage");
     }
-});
+})
 app.get('/candidates', isLoggined, async (req, res) => {
     const candidates = await userModel.find({
         role: 'user'
@@ -89,7 +105,7 @@ app.get('/user/profile', isLoggined, async (req, res) => {
 app.get('/signup', async (req, res) => {
     res.render('signup');
 })
-app.get("/recruiter-home", isLoggined, async (req, res) => {
+app.get("/recruiter-home", isLoggined, onlyRecruiter, async (req, res) => {
     try {
 
         // Get this recruiter's jobs
@@ -116,13 +132,16 @@ app.get("/recruiter-home", isLoggined, async (req, res) => {
         })
             .populate("job")
             .populate("applicant");
-
+        const candidates = await userModel.find({
+            role: 'user'
+        });
 
         // Send everything to recruiter.ejs
         res.render("recruiter", {
             jobs,
             recruiter,
-            applications
+            applications,
+            candidates
         });
 
     } catch (error) {
@@ -188,25 +207,54 @@ app.get('/login', (req, res) => {
     res.render('login');
 })
 app.post('/login', async (req, res) => {
+
     const { email, password } = req.body;
+
     const user = await userModel.findOne({ email: email });
+
     console.log(user);
+
+    if (!user) {
+        return res.redirect('/login');
+    }
+
     bcrypt.compare(password, user.password, function (err, result) {
-        // result == true
+
         if (err) {
             console.log('something went wrong', err);
-        }
-        if (result) {
-            // 4. Give them their login token!
-            const token = jwt.sign({ email: user.email }, JWT);
-            res.cookie('token', token);
-            // 5. Redirect to /home so it fetches the user data and renders home.ejs properly
-            return res.status(200).redirect('/');
-        } else {
             return res.redirect('/login');
         }
+
+        if (result) {
+
+            const token = jwt.sign(
+                { email: user.email },
+                JWT
+            );
+
+            res.cookie('token', token);
+
+            // Check user's role
+            if (user.role === 'recruiter') {
+                return res.redirect('/recruiter-home');
+            }
+
+            if (user.role === 'user') {
+                return res.redirect('/choose-passion');
+            }
+
+            // If no role has been selected yet
+            return res.redirect('/role');
+
+        } else {
+
+            return res.redirect('/login');
+
+        }
+
     });
-})
+
+});
 app.get('/logout', (req, res) => {
     res.cookie('token', '');
     res.redirect('/login');
@@ -355,50 +403,117 @@ app.get('/apply/:id', isLoggined, async (req, res) => {
     const jobs = await postjobsModel.findById(req.params.id).populate('recruiter').populate('company')
     res.render('apply', { jobs });
 })
-app.post('/apply/:id', isLoggined, async (req, res) => {
+app.post(
+    '/apply/:id',
+    isLoggined,
+    upload.single('resume'),
+    async (req, res) => {
 
-    const {
-        name,
-        email,
-        phone,
-        resume,
-        coverLetter
-    } = req.body;
+        const { name, email, phone, coverLetter } = req.body;
 
-    const application = await ApplyModel.create({
-        applicant: req.user._id,
-        job: req.params.id,
-        name,
-        email,
-        phone,
-        resume,
-        coverLetter,
-        status: 'Pending'
-    });
-    console.log(application)
-    res.redirect('/application-success');
-});
+        const application = await ApplyModel.create({
+            applicant: req.user._id,
+            job: req.params.id,
+            name,
+            email,
+            phone,
+            resume: req.file.filename,
+            coverLetter,
+            status: 'Pending'
+        });
+
+        res.redirect('/application-success');
+    }
+);
 app.get('/applications', isLoggined, async (req, res) => {
-
     const jobs = await postjobsModel.find({
         recruiter: req.user._id
     });
-
     const jobIds = jobs.map(job => job._id);
-
     const applications = await ApplyModel.find({
         job: { $in: jobIds }
     })
         .populate('job')
         .populate('applicant');
-
     res.render('application', { applications });
-
 });
+app.get('/applications/:id', isLoggined, async (req, res) => {
+    const application = await ApplyModel.findById(req.params.id).populate('job')
+        .populate('applicant');
+    res.render('view-candidate', { application });
+})
+app.post('/applications/:id', isLoggined, async (req, res) => {
+    try {
+        const userStatus = await ApplyModel.findById(req.params.id);
+        if (!userStatus) {
+            return res.status(404).send("Application not found.");
+        }
+        userStatus.status = req.body.status;
+        await userStatus.save();
+        return res.redirect('/recruiter-home');
+    } catch (error) {
+        return res.status(500).send("Server Error: " + error.message);
+    }
+});
+
+// app.post('/applications/:id', isLoggined, async (req, res) => {
+//      try {
+//         const { status } = req.body;
+//         const application = await ApplyModel.findOneAndUpdate(
+//             { email: req.user.email },
+//             { status: status },       
+//             { new: true }             
+//         );
+//         if (!application) {
+//             return res.status(404).json({ message: "Application not found" });
+//         }
+//         return res.status(200).json({ success: true, data: changeStatus });
+//     } catch (error) {
+//         return res.status(500).json({ message: "Server error", error: error.message });
+//     }
+
+// })
 app.get('/application-success', isLoggined, async (req, res) => {
     const application = await ApplyModel.findOne({ email: req.user.email })
     res.render('application-success', { application })
 })
+app.get('/contact-candidate/:id', isLoggined, async (req, res) => {
+    const candidate = await userModel.findOne({ _id: req.params.id });
+
+    if (!candidate) {
+        return res.status(404).send("Candidate not found");
+    }
+    res.render('contact-candidate', { candidate: candidate })
+})
+app.post('/contact-candidate/:id', isLoggined, async (req, res) => {
+
+    const { subject, message } = req.body;
+
+    const createMessage = await messageModel.create({
+        subject,
+        message,
+        sender: req.user._id,
+        receiver: req.params.id,
+        read: false
+    });
+
+    console.log(createMessage);
+
+    res.redirect('/recruiter-home');
+});
+app.get('/messages', isLoggined, async (req, res) => {
+    try {
+        const messages = await messageModel
+            .find({ receiver: req.user._id })
+            .populate('sender')
+            .sort({ createdAt: -1 });
+
+        res.render('message', { messages });
+
+    } catch (error) {
+        res.status(500).send("Server Error: " + error.message);
+    }
+});
 function isRecruiterLoggedIn(req, res, next) {
 
     const token = req.cookies.token;
@@ -420,19 +535,31 @@ function isRecruiterLoggedIn(req, res, next) {
     }
 }
 async function checkPassion(req, res, next) {
-    try {
-        // req.user is set by your isLoggined middleware right before this runs
-        const email = req.user.email;
-        const user = await userModel.findOne({ email });
-
-        // Use redirect instead of render so the browser URL actually changes
-        if (user && (!user.passion || user.passion === '')) {
-            return res.redirect('/choose-passion');
-        }
-        next();
-    } catch (error) {
-        next(error);
+    if (req.user.role === 'recruiter') {
+        return res.redirect('/recruiter-home');
     }
+
+    if (req.user.role === 'user') {
+        return res.redirect('/');
+    }
+
+    next();
+}
+function onlyUser(req, res, next) {
+
+    if (req.user.role !== 'user') {
+        return res.redirect('/recruiter-home');
+    }
+
+    next();
+}
+function onlyRecruiter(req, res, next) {
+
+    if (req.user.role !== 'recruiter') {
+        return res.redirect('/');
+    }
+
+    next();
 }
 async function checkRole(req, res, next) {
     try {

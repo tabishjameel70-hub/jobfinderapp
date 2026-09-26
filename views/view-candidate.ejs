@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Candidate Profile | JobFinder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#fffaf5] text-stone-800">
+
+    <!-- Navbar -->
+    <nav class="border-b border-stone-200 bg-white">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+
+            <a href="/recruiter-home"
+                class="text-2xl font-extrabold tracking-tight text-orange-600">
+                JobFinder
+            </a>
+
+            <div class="flex items-center gap-6 text-sm font-medium">
+                <a href="/recruiter-home"
+                    class="text-stone-600 hover:text-orange-600 transition">
+                    Dashboard
+                </a>
+
+                <a href="/candidates"
+                    class="text-orange-600">
+                    Candidates
+                </a>
+
+                <a href="/profile"
+                    class="text-stone-600 hover:text-orange-600 transition">
+                    Profile
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- Main -->
+    <main class="max-w-6xl mx-auto px-6 py-10">
+
+        <!-- Back -->
+        <a href="/candidates"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-stone-500 hover:text-orange-600 transition mb-7">
+
+            ← Back to Candidates
+
+        </a>
+
+
+        <!-- Candidate Header -->
+        <section class="bg-white border border-stone-200 rounded-3xl p-8 shadow-sm">
+
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+                <div class="flex items-center gap-5">
+
+                    <!-- Avatar -->
+                    <div
+                        class="w-20 h-20 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-3xl font-bold">
+
+                        <%= application.name ? application.name.charAt(0).toUpperCase() : 'C' %>
+
+                    </div>
+
+
+                    <div>
+
+                        <h1 class="text-3xl font-extrabold text-stone-900">
+                            <%= application.name %>
+                        </h1>
+
+                        <p class="text-stone-500 mt-1">
+                            <%= application.email %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Status -->
+                <div>
+
+                    <span class="text-xs font-semibold uppercase tracking-wider text-stone-400">
+                        Application Status
+                    </span>
+
+                    <div class="mt-2">
+
+                        <% if (application.status === 'accepted') { %>
+
+                            <span
+                                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700">
+                                Accepted
+                            </span>
+
+                        <% } else if (application.status === 'rejected') { %>
+
+                            <span
+                                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-red-100 text-red-700">
+                                Rejected
+                            </span>
+
+                        <% } else { %>
+
+                            <span
+                                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-yellow-100 text-yellow-700">
+                                Pending
+                            </span>
+
+                        <% } %>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+
+
+            <!-- Left -->
+            <div class="lg:col-span-2 space-y-6">
+
+
+                <!-- Contact Information -->
+                <section class="bg-white border border-stone-200 rounded-3xl p-7 shadow-sm">
+
+                    <h2 class="text-xl font-bold text-stone-900">
+                        Contact Information
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+
+                        <div>
+                            <p class="text-xs uppercase tracking-wider font-semibold text-stone-400">
+                                Full Name
+                            </p>
+
+                            <p class="mt-2 font-semibold text-stone-800">
+                                <%= application.name %>
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <p class="text-xs uppercase tracking-wider font-semibold text-stone-400">
+                                Email
+                            </p>
+
+                            <p class="mt-2 font-semibold text-stone-800 break-all">
+                                <%= application.email %>
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <p class="text-xs uppercase tracking-wider font-semibold text-stone-400">
+                                Phone
+                            </p>
+
+                            <p class="mt-2 font-semibold text-stone-800">
+                                <%= application.phone || 'Not provided' %>
+                            </p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Cover Letter -->
+                <section class="bg-white border border-stone-200 rounded-3xl p-7 shadow-sm">
+
+                    <h2 class="text-xl font-bold text-stone-900">
+                        Cover Letter
+                    </h2>
+
+                    <div class="mt-5 bg-stone-50 rounded-2xl p-5">
+
+                        <% if (application.coverLetter) { %>
+
+                            <p class="text-stone-600 leading-7 whitespace-pre-line">
+                                <%= application.coverLetter %>
+                            </p>
+
+                        <% } else { %>
+
+                            <p class="text-stone-400">
+                                No cover letter was provided.
+                            </p>
+
+                        <% } %>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Resume -->
+                <section class="bg-white border border-stone-200 rounded-3xl p-7 shadow-sm">
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <h2 class="text-xl font-bold text-stone-900">
+                                Resume
+                            </h2>
+
+                            <p class="text-sm text-stone-500 mt-1">
+                                Candidate's submitted resume
+                            </p>
+
+                        </div>
+
+
+                        <% if (application.resume) { %>
+
+                            <a href="<%= application.resume %>"
+                                target="_blank"
+                                class="px-5 py-3 rounded-xl bg-orange-600 text-white text-sm font-bold hover:bg-orange-700 transition">
+
+                                View Resume
+
+                            </a>
+
+                        <% } %>
+
+                    </div>
+
+                    <% if (!application.resume) { %>
+
+                        <div class="mt-5 bg-stone-50 rounded-2xl p-5 text-sm text-stone-400">
+                            No resume was provided.
+                        </div>
+
+                    <% } %>
+
+                </section>
+
+            </div>
+
+
+            <!-- Right -->
+            <div class="space-y-6">
+
+
+                <!-- Applied Job -->
+                <section class="bg-white border border-stone-200 rounded-3xl p-7 shadow-sm">
+
+                    <h2 class="text-lg font-bold text-stone-900">
+                        Applied Job
+                    </h2>
+
+
+                    <% if (application.job) { %>
+
+                        <div class="mt-5">
+
+                            <p class="text-xs uppercase tracking-wider font-semibold text-stone-400">
+                                Position
+                            </p>
+
+                            <p class="mt-2 text-lg font-bold text-stone-900">
+                                <%= application.job.title %>
+                            </p>
+
+
+                            <% if (application.job.firmName) { %>
+
+                                <p class="text-sm text-stone-500 mt-1">
+                                    <%= application.job.firmName %>
+                                </p>
+
+                            <% } %>
+
+
+                            <% if (application.job.location) { %>
+
+                                <div class="flex items-center gap-2 mt-5 text-sm text-stone-500">
+                                    📍
+                                    <%= application.job.location %>
+                                </div>
+
+                            <% } %>
+
+                        </div>
+
+                    <% } else { %>
+
+                        <p class="mt-4 text-sm text-stone-400">
+                            Job information unavailable.
+                        </p>
+
+                    <% } %>
+
+                </section>
+
+
+                <!-- Application Actions -->
+                <section class="bg-white border border-stone-200 rounded-3xl p-7 shadow-sm">
+
+                    <h2 class="text-lg font-bold text-stone-900">
+                        Application Actions
+                    </h2>
+
+                    <div class="mt-5 space-y-3">
+
+                        <form action="/applications/<%= application._id %>"
+                            method="POST">
+
+                            <button
+                                type="submit"
+                                class="w-full py-3 rounded-xl bg-green-600 text-white font-bold hover:bg-green-700 transition">
+
+                                Accept Candidate
+
+                            </button>
+
+                        </form>
+
+
+                        <form action="/applications/<%= application._id %>"
+                            method="POST">
+
+                            <button
+                                type="submit"
+                                class="w-full py-3 rounded-xl bg-red-50 text-red-600 font-bold hover:bg-red-100 transition">
+
+                                Reject Candidate
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </section>
+
+
+                <!-- Application Details -->
+                <section class="bg-stone-900 text-white rounded-3xl p-7 shadow-sm">
+
+                    <h2 class="text-lg font-bold">
+                        Application Details
+                    </h2>
+
+                    <div class="mt-5 space-y-4 text-sm">
+
+                        <div class="flex justify-between gap-4">
+
+                            <span class="text-stone-400">
+                                Application ID
+                            </span>
+
+                            <span class="font-medium truncate">
+                                <%= application._id %>
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex justify-between gap-4">
+
+                            <span class="text-stone-400">
+                                Status
+                            </span>
+
+                            <span class="font-semibold">
+                                <%= application.status || 'pending' %>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

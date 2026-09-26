@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const recruiterSchema = mongoose.Schema({
+     recruiter: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User' // or whatever your User model name is
+  },
     title: {
         type: String
     },

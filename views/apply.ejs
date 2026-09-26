@@ -90,8 +90,11 @@
 
         <!-- Application Form -->
 
-            <form action="/apply/<%= jobs._id %>" method="POST"
-              class="bg-white border border-orange-100">
+        <form
+            action="/apply/<%= jobs._id %>"
+            method="POST"
+            enctype="multipart/form-data"
+            class="bg-white border border-orange-100 rounded-3xl shadow-sm p-6 md:p-8">
 
 
             <h2 class="text-2xl font-bold text-stone-900 mb-7">
