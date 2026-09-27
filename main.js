@@ -661,6 +661,10 @@ async function isLoggined(req, res, next) {
         res.redirect('/login');
     }
 }
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-})
+if (require.main === module) {
+    app.listen(port, () => {
+        console.log(`Example app listening on port ${port}`);
+    });
+}
+
+module.exports = app;
