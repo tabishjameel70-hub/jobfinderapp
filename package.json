@@ -1,15 +1,25 @@
 {
   "name": "jobfinderapp",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A full-stack job recruitment platform built with Node.js, Express, MongoDB, Mongoose, EJS and Tailwind CSS",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "mongoose",
+    "ejs",
+    "job-portal"
+  ],
+  "author": "Tabish Jameel",
   "license": "ISC",
   "type": "commonjs",
+  "engines": {
+    "node": "24.x"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie": "^2.0.1",
