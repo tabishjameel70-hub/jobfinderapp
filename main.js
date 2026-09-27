@@ -17,10 +17,37 @@ app.set('views', path.join(__dirname, 'views'));
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const JWT = '123erwvdghlkyrtadeg##########jfrge478945645';
-const port = 3000;
+const port = process.env.PORT || 3000;
 const { upload } = require('./config/multerconfig');
 const { uploadResume } = require('./config/resumeconfig');
 
+// 
+// Connection helper
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected && mongoose.connection.readyState === 1) return;
+
+  try {
+    const db = await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000, // Timeout fast instead of hanging Vercel
+    });
+    isConnected = db.connections[0].readyState === 1;
+    console.log('MongoDB Connected');
+  } catch (err) {
+    console.error('MongoDB Connection Error:', err);
+    throw err;
+  }
+};
+// 
+// Middleware to ensure DB is connected on every serverless invocation
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    res.status(500).send('Database connection failed');
+  }
+});
 app.get('/', isLoggined, onlyUser, async (req, res) => {
     try {
 
@@ -469,7 +496,6 @@ app.post('/apply/:id', isLoggined, uploadResume.single('resume'), async (req, re
     console.log(application)
     res.redirect('/application-success');
 });
-
 app.get('/applications', isLoggined, async (req, res) => {
     const jobs = await postjobsModel.find({
         recruiter: req.user._id
@@ -513,23 +539,6 @@ app.post('/applications/:id', isLoggined, async (req, res) => {
         return res.status(500).send("Server Error: " + error.message);
     }
 });
-// app.post('/applications/:id', isLoggined, async (req, res) => {
-//      try {
-//         const { status } = req.body;
-//         const application = await ApplyModel.findOneAndUpdate(
-//             { email: req.user.email },
-//             { status: status },       
-//             { new: true }             
-//         );
-//         if (!application) {
-//             return res.status(404).json({ message: "Application not found" });
-//         }
-//         return res.status(200).json({ success: true, data: changeStatus });
-//     } catch (error) {
-//         return res.status(500).json({ message: "Server error", error: error.message });
-//     }
-
-// })
 app.get('/application-success', isLoggined, async (req, res) => {
     const application = await ApplyModel.findOne({ email: req.user.email })
     res.render('application-success', { application })
@@ -662,9 +671,9 @@ async function isLoggined(req, res, next) {
     }
 }
 if (require.main === module) {
-    app.listen(port, () => {
-        console.log(`Example app listening on port ${port}`);
-    });
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+  });
 }
 
 module.exports = app;
