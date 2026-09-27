@@ -25,21 +25,20 @@ const { uploadResume } = require('./config/resumeconfig');
 // 
 // Connection helper
 let isConnected = false;
-const connectDB = async () => {
-  if (isConnected && mongoose.connection.readyState === 1) return;
 
+const connectDB = async () => {
+  if (isConnected || mongoose.connection.readyState === 1) {
+    isConnected = true;
+    return;
+  }
   try {
-    const db = await mongoose.connect(process.env.MONGODB_URI, {
-      serverSelectionTimeoutMS: 5000, // Timeout fast instead of hanging Vercel
-    });
+    const db = await mongoose.connect(process.env.MONGODB_URI);
     isConnected = db.connections[0].readyState === 1;
-    console.log('MongoDB Connected');
-  } catch (err) {
-    console.error('MongoDB Connection Error:', err);
-    throw err;
+  } catch (error) {
+    console.error("MongoDB Connection Error:", error);
+    throw error;
   }
 };
-// 
 // Middleware to ensure DB is connected on every serverless invocation
 app.use(async (req, res, next) => {
   try {
