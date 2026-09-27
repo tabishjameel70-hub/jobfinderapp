@@ -13,7 +13,7 @@ app.use(express.static(path.join('public')));
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.set('view engine', 'ejs');
-app.set('views', path.join('views'));
+app.set('views', path.join(__dirname, 'views'));
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const JWT = '123erwvdghlkyrtadeg##########jfrge478945645';
