@@ -7,6 +7,7 @@ const messageModel = require('./models/message');
 const recruiterModel = require('./models/recruiter');
 const ApplyModel = require('./models/apply');
 const companyModel = require('./models/company');
+const mongoose = require('mongoose');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join('public')));
