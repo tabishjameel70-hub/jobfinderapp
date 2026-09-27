@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>All Jobs - JobFinder</title>
+    <title>Saved Jobs - JobFinder</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -22,12 +22,16 @@
 
             <div class="flex items-center gap-6 text-sm font-medium">
 
-                <a href="/" class="text-stone-600 hover:text-orange-500">
+                <a href="/" class="text-stone-600 hover:text-orange-500 transition">
                     Home
                 </a>
 
-                <a href="/jobs" class="text-orange-500">
+                <a href="/jobs" class="text-stone-600 hover:text-orange-500 transition">
                     Jobs
+                </a>
+
+                <a href="/saved-jobs" class="text-orange-500">
+                    Saved Jobs
                 </a>
 
             </div>
@@ -40,46 +44,77 @@
     <section class="max-w-7xl mx-auto px-6 pt-12 pb-8">
 
         <p class="text-sm font-semibold text-orange-500 uppercase tracking-wider">
-            Find your next opportunity
+            Your collection
         </p>
 
-        <h1 class="text-4xl md:text-5xl font-bold mt-2 text-stone-900">
-            Explore All Jobs
-        </h1>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
 
-        <p class="mt-4 text-stone-500 max-w-2xl">
-            Discover technical jobs from companies looking for talented people.
-        </p>
+            <div>
+
+                <h1 class="text-4xl md:text-5xl font-bold mt-2 text-stone-900">
+                    Saved Jobs
+                </h1>
+
+                <p class="mt-4 text-stone-500 max-w-2xl">
+                    Keep track of the jobs you're interested in and come back to them anytime.
+                </p>
+
+            </div>
+
+            <div class="bg-white border border-orange-100 rounded-2xl px-5 py-4">
+
+                <p class="text-xs text-stone-400 uppercase tracking-wide">
+                    Saved
+                </p>
+
+                <p class="text-2xl font-bold text-orange-500">
+                    <%= user.saveJobs.length %>
+                </p>
+
+            </div>
+
+        </div>
 
     </section>
 
 
-    <!-- Jobs -->
+    <!-- Saved Jobs -->
     <main class="max-w-7xl mx-auto px-6 pb-16">
 
-        <% if (jobs.length===0) { %>
+        <% if (user.saveJobs.length===0) { %>
 
-            <div class="bg-white border border-orange-100 rounded-2xl p-12 text-center">
+            <!-- Empty State -->
+            <div class="bg-white border border-orange-100 rounded-2xl p-14 text-center">
 
-                <div class="text-5xl mb-4">
-                    🔍
+                <div class="w-20 h-20 mx-auto rounded-2xl bg-orange-100
+                            flex items-center justify-center text-4xl">
+                    ❤️
                 </div>
 
-                <h2 class="text-xl font-bold text-stone-800">
-                    No jobs available
+                <h2 class="text-2xl font-bold text-stone-900 mt-6">
+                    No saved jobs yet
                 </h2>
 
-                <p class="text-stone-500 mt-2">
-                    There are currently no jobs posted.
+                <p class="text-stone-500 mt-2 max-w-md mx-auto">
+                    When you find a job you're interested in, save it here so you can easily find it later.
                 </p>
+
+                <a href="/jobs" class="inline-block mt-6 px-6 py-3 rounded-xl bg-orange-500
+                           text-white font-semibold hover:bg-orange-600 transition">
+
+                    Explore Jobs
+
+                </a>
 
             </div>
 
             <% } else { %>
 
+
+                <!-- Jobs Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                    <% jobs.forEach(job=> { %>
+                    <% user.saveJobs.forEach(job=> { %>
 
                         <div class="bg-white border border-orange-100 rounded-2xl p-6
                                 hover:shadow-lg hover:-translate-y-1
@@ -95,7 +130,6 @@
                                     <%= job.title ? job.title.charAt(0).toUpperCase() : "J" %>
 
                                 </div>
-
 
                                 <% if (job.jobType) { %>
 
@@ -118,8 +152,6 @@
                                     <%= job.title %>
                                 </h2>
 
-
-                                <!-- Company -->
                                 <% if (job.company) { %>
 
                                     <p class="mt-1 text-sm font-medium text-orange-500">
@@ -134,7 +166,6 @@
                             <!-- Job Details -->
                             <div class="mt-5 space-y-3 text-sm text-stone-500">
 
-                                <!-- Job Location -->
                                 <% if (job.location) { %>
 
                                     <div class="flex items-center gap-2">
@@ -147,7 +178,6 @@
                                     <% } %>
 
 
-                                        <!-- Workplace -->
                                         <% if (job.workplace) { %>
 
                                             <div class="flex items-center gap-2">
@@ -160,7 +190,6 @@
                                             <% } %>
 
 
-                                                <!-- Category -->
                                                 <% if (job.category) { %>
 
                                                     <div class="flex items-center gap-2">
@@ -173,7 +202,6 @@
                                                     <% } %>
 
 
-                                                        <!-- Salary -->
                                                         <% if (job.salary) { %>
 
                                                             <div class="flex items-center gap-2">
@@ -185,26 +213,12 @@
                                                                         <% if (job.salaryMax) { %>
                                                                             - <%= job.salaryMax %>
                                                                                 <% } %>
+
                                                                 </span>
 
                                                             </div>
 
                                                             <% } %>
-
-
-                                                                <!-- Company Industry -->
-                                                                <% if (job.company && job.company.industry) { %>
-
-                                                                    <div class="flex items-center gap-2">
-                                                                        <span>🏢</span>
-
-                                                                        <span>
-                                                                            <%= job.company.industry %>
-                                                                        </span>
-
-                                                                    </div>
-
-                                                                    <% } %>
 
                             </div>
 
@@ -218,10 +232,8 @@
 
                                 <% } %>
 
-
-                                    <!-- Footer -->
                                     <div class="mt-6 pt-5 border-t border-stone-100
-                                    flex items-center justify-between">
+            flex items-center justify-between gap-3">
 
                                         <% if (job.createdAt) { %>
 
@@ -231,27 +243,33 @@
 
                                             <% } %>
 
+                                                <div class="flex items-center gap-2">
 
-                                                <!-- View Job -->
-                                                <a href="/jobs/<%= job._id %>" class="px-4 py-2 rounded-xl bg-orange-500
-                                      text-white text-sm font-semibold
-                                      hover:bg-orange-600 transition">
+                                                    <!-- View Job -->
+                                                    <a href="/jobs/<%= job._id %>" class="px-4 py-2 rounded-xl bg-orange-500
+                   text-white text-sm font-semibold
+                   hover:bg-orange-600 transition">
 
-                                                    View Job
+                                                        View Job
 
-                                                </a>
-                                                <form action="/save-jobs/<%= job._id %>" method="POST">
-                                                    <button type="submit" class="px-4 py-2 rounded-xl bg-orange-500
-        text-white text-sm font-semibold
-        hover:bg-orange-600 transition">
+                                                    </a>
 
-                                                        Save Job ❤️
+                                                    <!-- Remove Saved Job -->
+                                                    <form action="/remove-saved-job/<%= job._id %>" method="POST">
 
-                                                    </button>
-                                                </form>
+                                                        <button type="submit" class="px-4 py-2 rounded-xl bg-red-50
+                       text-red-600 text-sm font-semibold
+                       hover:bg-red-100 transition">
+
+                                                            Remove
+
+                                                        </button>
+
+                                                    </form>
+
+                                                </div>
 
                                     </div>
-
                         </div>
 
                         <% }) %>

@@ -13,30 +13,14 @@ app.use(express.static(path.join('public')));
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.set('view engine', 'ejs');
-const multer = require('multer');
 app.set('views', path.join('views'));
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const recruiter = require('./models/recruiter');
-const { asyncWrapProviders } = require('async_hooks');
-const user = require('./models/user');
 const JWT = '123erwvdghlkyrtadeg##########jfrge478945645';
 const port = 3000;
-const storage = multer.diskStorage({
+const { upload } = require('./config/multerconfig');
+const { uploadResume } = require('./config/resumeconfig');
 
-    destination: function (req, file, cb) {
-        cb(null, 'public/uploads/resumes');
-    },
-
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-
-});
-
-const upload = multer({
-    storage: storage
-});
 app.get('/', isLoggined, onlyUser, async (req, res) => {
     try {
 
@@ -74,6 +58,19 @@ app.get('/', isLoggined, onlyUser, async (req, res) => {
         res.status(500).send("Something went wrong loading the homepage");
     }
 })
+app.post('/', isLoggined, onlyUser, upload.single('image'), async (req, res) => {
+    try {
+        const user = await userModel.findOne({
+            email: req.user.email
+        });
+        user.profileImage = req.file.filename;
+        await user.save();
+        res.redirect('/user/profile');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Failed to upload profile image');
+    }
+});
 app.get('/candidates', isLoggined, async (req, res) => {
     const candidates = await userModel.find({
         role: 'user'
@@ -367,16 +364,68 @@ app.get('/profile', isLoggined, async (req, res) => {
     res.render('recruiter-profile', { recruiter });
 })
 app.get('/jobs', isLoggined, async (req, res) => {
-
     const jobs = await postjobsModel
         .find()
         .populate('company')
         .sort({ createdAt: -1 });
-
     console.log(jobs);
-
     res.render('jobs', { jobs });
+});
+app.get('/saved-jobs', isLoggined, async (req, res) => {
+    try {
+        const user = await userModel
+            .findById(req.user._id)
+            .populate({
+                path: 'saveJobs',
+                populate: {
+                    path: 'company'
+                }
+            });
 
+        res.render('saved-jobs', { user });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Something went wrong');
+    }
+});
+app.post('/save-jobs/:id', isLoggined, async (req, res) => {
+    try {
+
+        // Get the job using the :id from the URL
+        const job = await postjobsModel.findById(req.params.id);
+        if (!job) {
+            return res.status(404).send('Job not found');
+        }
+        const user = await userModel.findById(req.user._id);
+        // Prevent duplicate saves
+        if (!user.saveJobs.includes(job._id)) {
+            user.saveJobs.push(job._id);
+            await user.save();
+        }
+        res.redirect('/jobs');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Something went wrong');
+    }
+});
+app.post('/remove-saved-job/:id', isLoggined, async (req, res) => {
+    try {
+
+        const user = await userModel.findById(req.user._id);
+
+        user.saveJobs = user.saveJobs.filter(
+            jobId => jobId.toString() !== req.params.id
+        );
+
+        await user.save();
+
+        res.redirect('/saved-jobs');
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Something went wrong');
+    }
 });
 app.get('/jobs/:id', isLoggined, async (req, res) => {
 
@@ -401,30 +450,26 @@ app.get('/see-details/:id', isLoggined, async (req, res) => {
 })
 app.get('/apply/:id', isLoggined, async (req, res) => {
     const jobs = await postjobsModel.findById(req.params.id).populate('recruiter').populate('company')
-    res.render('apply', { jobs });
+    const user = await userModel.findById(req.user._id);
+    res.render('apply', { jobs, user });
+
 })
-app.post(
-    '/apply/:id',
-    isLoggined,
-    upload.single('resume'),
-    async (req, res) => {
+app.post('/apply/:id', isLoggined, uploadResume.single('resume'), async (req, res) => {
+    const { name, email, phone, coverLetter } = req.body;
+    const application = await ApplyModel.create({
+        applicant: req.user._id,
+        job: req.params.id,
+        name,
+        email,
+        phone,
+        resume: req.file.filename,
+        coverLetter,
+        status: 'Pending'
+    });
+    console.log(application)
+    res.redirect('/application-success');
+});
 
-        const { name, email, phone, coverLetter } = req.body;
-
-        const application = await ApplyModel.create({
-            applicant: req.user._id,
-            job: req.params.id,
-            name,
-            email,
-            phone,
-            resume: req.file.filename,
-            coverLetter,
-            status: 'Pending'
-        });
-
-        res.redirect('/application-success');
-    }
-);
 app.get('/applications', isLoggined, async (req, res) => {
     const jobs = await postjobsModel.find({
         recruiter: req.user._id
@@ -437,6 +482,14 @@ app.get('/applications', isLoggined, async (req, res) => {
         .populate('applicant');
     res.render('application', { applications });
 });
+app.get('/resume/:id', isLoggined, async (req, res) => {
+    const application = await ApplyModel
+        .findById(req.params.id)
+        .populate('job')
+        .populate('applicant');
+
+    res.render('resume', { application });
+})
 app.get('/applications/:id', isLoggined, async (req, res) => {
     const application = await ApplyModel.findById(req.params.id).populate('job')
         .populate('applicant');
@@ -445,17 +498,21 @@ app.get('/applications/:id', isLoggined, async (req, res) => {
 app.post('/applications/:id', isLoggined, async (req, res) => {
     try {
         const userStatus = await ApplyModel.findById(req.params.id);
+
         if (!userStatus) {
             return res.status(404).send("Application not found.");
         }
+
         userStatus.status = req.body.status;
+
         await userStatus.save();
-        return res.redirect('/recruiter-home');
+
+        return res.redirect('/applications/' + req.params.id);
+
     } catch (error) {
         return res.status(500).send("Server Error: " + error.message);
     }
 });
-
 // app.post('/applications/:id', isLoggined, async (req, res) => {
 //      try {
 //         const { status } = req.body;
@@ -514,6 +571,7 @@ app.get('/messages', isLoggined, async (req, res) => {
         res.status(500).send("Server Error: " + error.message);
     }
 });
+
 function isRecruiterLoggedIn(req, res, next) {
 
     const token = req.cookies.token;

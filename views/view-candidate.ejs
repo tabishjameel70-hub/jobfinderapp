@@ -41,11 +41,6 @@
                     class="text-orange-600">
                     Candidates
                 </a>
-
-                <a href="/profile"
-                    class="text-stone-600 hover:text-orange-600 transition">
-                    Profile
-                </a>
             </div>
 
         </div>
@@ -95,42 +90,41 @@
                 </div>
 
 
-                <!-- Status -->
-                <div>
+           <!-- Status -->
+<div>
 
-                    <span class="text-xs font-semibold uppercase tracking-wider text-stone-400">
-                        Application Status
-                    </span>
+    <span class="text-xs font-semibold uppercase tracking-wider text-stone-400">
+        Application Status
+    </span>
 
-                    <div class="mt-2">
+    <div class="mt-2">
 
-                        <% if (application.status === 'accepted') { %>
+        <% if (application.status === 'Accepted') { %>
 
-                            <span
-                                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700">
-                                Accepted
-                            </span>
+            <span
+                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-green-100 text-green-700">
+                Accepted
+            </span>
 
-                        <% } else if (application.status === 'rejected') { %>
+        <% } else if (application.status === 'Rejected') { %>
 
-                            <span
-                                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-red-100 text-red-700">
-                                Rejected
-                            </span>
+            <span
+                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-red-100 text-red-700">
+                Rejected
+            </span>
 
-                        <% } else { %>
+        <% } else { %>
 
-                            <span
-                                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-yellow-100 text-yellow-700">
-                                Pending
-                            </span>
+            <span
+                class="inline-flex px-4 py-2 rounded-full text-sm font-bold bg-yellow-100 text-yellow-700">
+                Pending
+            </span>
 
-                        <% } %>
+        <% } %>
 
-                    </div>
+    </div>
 
-                </div>
-
+</div>
             </div>
 
         </section>
@@ -238,7 +232,7 @@
 
                         <% if (application.resume) { %>
 
-                            <a href="<%= application.resume %>"
+                         <a href="/resume/<%= application.resume %>"
                                 target="_blank"
                                 class="px-5 py-3 rounded-xl bg-orange-600 text-white text-sm font-bold hover:bg-orange-700 transition">
 
@@ -318,46 +312,49 @@
 
                 </section>
 
+<!-- Application Actions -->
+<section class="bg-white border border-stone-200 rounded-3xl p-7 shadow-sm">
 
-                <!-- Application Actions -->
-                <section class="bg-white border border-stone-200 rounded-3xl p-7 shadow-sm">
+    <h2 class="text-lg font-bold text-stone-900">
+        Application Actions
+    </h2>
 
-                    <h2 class="text-lg font-bold text-stone-900">
-                        Application Actions
-                    </h2>
+    <div class="mt-5 space-y-3">
 
-                    <div class="mt-5 space-y-3">
+        <!-- Accept -->
+        <form action="/applications/<%= application._id %>" method="POST">
 
-                        <form action="/applications/<%= application._id %>"
-                            method="POST">
+            <input type="hidden" name="status" value="Accepted">
 
-                            <button
-                                type="submit"
-                                class="w-full py-3 rounded-xl bg-green-600 text-white font-bold hover:bg-green-700 transition">
+            <button
+                type="submit"
+                class="w-full py-3 rounded-xl bg-green-600 text-white font-bold hover:bg-green-700 transition">
 
-                                Accept Candidate
+                Accept Candidate
 
-                            </button>
+            </button>
 
-                        </form>
+        </form>
 
 
-                        <form action="/applications/<%= application._id %>"
-                            method="POST">
+        <!-- Reject -->
+        <form action="/applications/<%= application._id %>" method="POST">
 
-                            <button
-                                type="submit"
-                                class="w-full py-3 rounded-xl bg-red-50 text-red-600 font-bold hover:bg-red-100 transition">
+            <input type="hidden" name="status" value="Rejected">
 
-                                Reject Candidate
+            <button
+                type="submit"
+                class="w-full py-3 rounded-xl bg-red-50 text-red-600 font-bold hover:bg-red-100 transition">
 
-                            </button>
+                Reject Candidate
 
-                        </form>
+            </button>
 
-                    </div>
+        </form>
 
-                </section>
+    </div>
+
+</section>
 
 
                 <!-- Application Details -->

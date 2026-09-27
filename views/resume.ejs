@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume | JobFinder</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#fffaf5] text-stone-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+            <a href="/" class="text-2xl font-extrabold text-orange-600">
+                JobFinder
+            </a>
+
+            <a href="/applications"
+                class="text-sm font-semibold text-stone-600 hover:text-orange-600 transition">
+                ← Back to Applications
+            </a>
+
+        </div>
+    </nav>
+
+
+    <!-- Main -->
+    <main class="max-w-6xl mx-auto px-6 py-10">
+
+        <!-- Header -->
+        <div class="mb-8">
+
+            <p class="text-sm font-semibold text-orange-600 mb-2">
+                APPLICATION RESUME
+            </p>
+
+            <h1 class="text-3xl md:text-4xl font-extrabold text-stone-900">
+                <%= application.name %>
+            </h1>
+
+            <p class="mt-2 text-stone-500">
+                Application for
+                <span class="font-semibold text-stone-700">
+                    <%= application.job.title %>
+                </span>
+            </p>
+
+        </div>
+
+
+        <!-- Applicant Information -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+
+            <!-- Profile Card -->
+            <div class="bg-white rounded-3xl border border-stone-200 p-6 shadow-sm">
+
+                <div class="flex items-center gap-4">
+
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-2xl font-bold">
+
+                        <%= application.name
+                            ? application.name.charAt(0).toUpperCase()
+                            : "U" %>
+
+                    </div>
+
+                    <div>
+                        <h2 class="font-bold text-lg text-stone-900">
+                            <%= application.name %>
+                        </h2>
+
+                        <p class="text-sm text-stone-500">
+                            Applicant
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Contact -->
+            <div class="bg-white rounded-3xl border border-stone-200 p-6 shadow-sm">
+
+                <p class="text-xs uppercase tracking-wider font-bold text-stone-400 mb-3">
+                    Contact
+                </p>
+
+                <p class="text-sm font-medium text-stone-700 mb-2">
+                    <%= application.email %>
+                </p>
+
+                <p class="text-sm text-stone-500">
+                    <%= application.phone %>
+                </p>
+
+            </div>
+
+
+            <!-- Status -->
+            <div class="bg-white rounded-3xl border border-stone-200 p-6 shadow-sm">
+
+                <p class="text-xs uppercase tracking-wider font-bold text-stone-400 mb-3">
+                    Application Status
+                </p>
+
+                <span
+                    class="inline-flex px-4 py-2 rounded-full bg-orange-100 text-orange-700 text-sm font-bold">
+                    <%= application.status %>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Resume -->
+        <div class="bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
+
+            <!-- Resume Header -->
+            <div class="px-6 py-5 border-b border-stone-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                <div>
+
+                    <h2 class="text-xl font-bold text-stone-900">
+                        Resume
+                    </h2>
+
+                    <p class="text-sm text-stone-500 mt-1">
+                        Uploaded resume from the applicant
+                    </p>
+
+                </div>
+
+                <a
+                    href="/uploads/resumes/<%= application.resume %>"
+                    target="_blank"
+                    class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-orange-600 text-white font-semibold hover:bg-orange-700 transition">
+
+                    Open Resume ↗
+
+                </a>
+
+            </div>
+
+
+            <!-- Resume Viewer -->
+            <div class="bg-stone-100 p-4 md:p-6">
+
+                <% if (application.resume) { %>
+
+                    <iframe
+                        src="/uploads/resumes/<%= application.resume %>"
+                        class="w-full h-[750px] rounded-2xl border border-stone-200 bg-white"
+                        title="Applicant Resume">
+                    </iframe>
+
+                <% } else { %>
+
+                    <div class="min-h-[300px] flex items-center justify-center">
+
+                        <div class="text-center">
+
+                            <div
+                                class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-stone-200 flex items-center justify-center text-2xl">
+                                📄
+                            </div>
+
+                            <h3 class="font-bold text-lg text-stone-800">
+                                No Resume Uploaded
+                            </h3>
+
+                            <p class="text-sm text-stone-500 mt-1">
+                                This applicant did not upload a resume.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+
+        <!-- Cover Letter -->
+        <div class="mt-6 bg-white rounded-3xl border border-stone-200 p-6 shadow-sm">
+
+            <h2 class="text-xl font-bold text-stone-900 mb-4">
+                Cover Letter
+            </h2>
+
+            <% if (application.coverLetter) { %>
+
+                <p class="text-stone-600 leading-7 whitespace-pre-line">
+                    <%= application.coverLetter %>
+                </p>
+
+            <% } else { %>
+
+                <p class="text-stone-400">
+                    No cover letter was provided.
+                </p>
+
+            <% } %>
+
+        </div>
+
+
+        <!-- Job Information -->
+        <div class="mt-6 bg-white rounded-3xl border border-stone-200 p-6 shadow-sm">
+
+            <h2 class="text-xl font-bold text-stone-900 mb-5">
+                Applied Job
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                <div>
+                    <p class="text-xs uppercase tracking-wider font-bold text-stone-400">
+                        Job Title
+                    </p>
+
+                    <p class="mt-1 font-semibold text-stone-800">
+                        <%= application.job.title %>
+                    </p>
+                </div>
+
+
+                <div>
+                    <p class="text-xs uppercase tracking-wider font-bold text-stone-400">
+                        Location
+                    </p>
+
+                    <p class="mt-1 font-semibold text-stone-800">
+                        <%= application.job.location %>
+                    </p>
+                </div>
+
+
+                <div>
+                    <p class="text-xs uppercase tracking-wider font-bold text-stone-400">
+                        Job Type
+                    </p>
+
+                    <p class="mt-1 font-semibold text-stone-800">
+                        <%= application.job.jobType %>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -10,13 +10,22 @@ const userSchema = mongoose.Schema({
     type: String
   },
   role: {
-  type: String,
-  enum: ['user', 'admin', 'recruiter'],
-  default: null
+    type: String,
+    enum: ['user', 'admin', 'recruiter'],
+    default: null
   },
-  applications:{
+  profileImage: {
+    type: String,
+  },
+  applications: {
     type: String,
     deafault: null,
-  }
+  },
+  saveJobs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'postjobs'
+    }
+  ]
 });
 module.exports = mongoose.model('user', userSchema);

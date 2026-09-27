@@ -199,50 +199,390 @@
 
                     </div>
 
+<!-- CATEGORY -->
+<div>
 
-                    <!-- CATEGORY -->
-                    <div>
+    <label class="block text-sm font-semibold mb-2">
+        Job category
+    </label>
 
-                        <label class="block text-sm font-semibold mb-2">
-                            Job category
-                        </label>
+    <select name="category"
+        class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10"
+        required>
 
-                        <select name="category"
-                            class="w-full h-12 px-4 rounded-xl border border-[#ddd7d0] bg-[#fffdfa] outline-none focus:border-[#ff7117] focus:ring-2 focus:ring-[#ff7117]/10"
-                            required>
+        <option value="">Select a category</option>
 
-                            <option value="">Select a category</option>
+        <!-- Technology & Software -->
+        <option>AI Ethicist</option>
+        <option>AI Research Scientist</option>
+        <option>API Engineer</option>
+        <option>AR/VR Developer</option>
+        <option>ASIC Design Engineer</option>
+        <option>Agile Coach</option>
+        <option>Android Developer</option>
+        <option>Application Security Engineer</option>
+        <option>Application Support Analyst</option>
+        <option>Automation Engineer</option>
+        <option>Automation Test Engineer</option>
+        <option>Backend Developer</option>
+        <option>Cloud Engineer</option>
+        <option>Cybersecurity Engineer</option>
+        <option>Data Analyst</option>
+        <option>Data Engineer</option>
+        <option>DevOps Engineer</option>
+        <option>Frontend Developer</option>
+        <option>Full Stack Developer</option>
+        <option>Machine Learning Engineer</option>
+        <option>Mobile App Developer</option>
+        <option>QA Engineer</option>
+        <option>Software Engineer</option>
+        <option>UI/UX Designer</option>
+        <option>Web Developer</option>
+        <option>Database Administrator</option>
+        <option>Game Developer</option>
+        <option>Game Designer</option>
+        <option>Network Engineer</option>
+        <option>Network Administrator</option>
+        <option>Systems Administrator</option>
+        <option>IT Manager</option>
+        <option>IT Support Specialist</option>
+        <option>Technical Support Specialist</option>
+        <option>Solutions Architect</option>
+        <option>Software Architect</option>
+        <option>Embedded Systems Engineer</option>
+        <option>Robotics Engineer</option>
+        <option>Blockchain Developer</option>
+        <option>Computer Vision Engineer</option>
+        <option>Natural Language Processing Engineer</option>
+        <option>Data Scientist</option>
+        <option>Data Engineer</option>
+        <option>Python Developer</option>
+        <option>Java Developer</option>
+        <option>C++ Developer</option>
+        <option>PHP Developer</option>
+        <option>JavaScript Developer</option>
+        <option>React Developer</option>
+        <option>Node.js Developer</option>
 
-                            <option>AI Ethicist</option>
-                            <option>AI Research Scientist</option>
-                            <option>API Engineer</option>
-                            <option>AR/VR Developer</option>
-                            <option>ASIC Design Engineer</option>
-                            <option>Agile Coach</option>
-                            <option>Android Developer</option>
-                            <option>Application Security Engineer</option>
-                            <option>Application Support Analyst</option>
-                            <option>Automation Engineer</option>
-                            <option>Automation Test Engineer</option>
-                            <option>Backend Developer</option>
-                            <option>Cloud Engineer</option>
-                            <option>Cybersecurity Engineer</option>
-                            <option>Data Analyst</option>
-                            <option>Data Engineer</option>
-                            <option>DevOps Engineer</option>
-                            <option>Frontend Developer</option>
-                            <option>Full Stack Developer</option>
-                            <option>Machine Learning Engineer</option>
-                            <option>Mobile App Developer</option>
-                            <option>QA Engineer</option>
-                            <option>Software Engineer</option>
-                            <option>UI/UX Designer</option>
-                            <option>Web Developer</option>
+        <!-- Business & Management -->
+        <option>Business Manager</option>
+        <option>Business Development Manager</option>
+        <option>Business Development Executive</option>
+        <option>Operations Manager</option>
+        <option>Project Manager</option>
+        <option>Product Manager</option>
+        <option>General Manager</option>
+        <option>Office Manager</option>
+        <option>Branch Manager</option>
+        <option>Store Manager</option>
+        <option>Team Leader</option>
+        <option>Supervisor</option>
+        <option>Executive Assistant</option>
+        <option>Administrative Assistant</option>
+        <option>Management Consultant</option>
+        <option>Operations Coordinator</option>
 
-                        </select>
+        <!-- Finance & Accounting -->
+        <option>Accountant</option>
+        <option>Accounting Assistant</option>
+        <option>Auditor</option>
+        <option>Financial Analyst</option>
+        <option>Financial Advisor</option>
+        <option>Banking Officer</option>
+        <option>Bank Manager</option>
+        <option>Cashier</option>
+        <option>Credit Analyst</option>
+        <option>Investment Analyst</option>
+        <option>Tax Consultant</option>
+        <option>Payroll Specialist</option>
+        <option>Finance Manager</option>
+        <option>Investment Banker</option>
+        <option>Loan Officer</option>
+        <option>Insurance Advisor</option>
+        <option>Actuary</option>
 
-                    </div>
+        <!-- Sales & Marketing -->
+        <option>Sales Representative</option>
+        <option>Sales Manager</option>
+        <option>Sales Executive</option>
+        <option>Marketing Manager</option>
+        <option>Marketing Executive</option>
+        <option>Digital Marketing Specialist</option>
+        <option>Social Media Manager</option>
+        <option>Brand Manager</option>
+        <option>Content Marketing Specialist</option>
+        <option>Public Relations Specialist</option>
+        <option>Advertising Specialist</option>
+        <option>Market Researcher</option>
+        <option>Customer Relationship Manager</option>
+        <option>Sales Coordinator</option>
+        <option>Merchandising Manager</option>
+        <option>Business Development Representative</option>
 
+        <!-- Human Resources -->
+        <option>HR Manager</option>
+        <option>HR Executive</option>
+        <option>HR Assistant</option>
+        <option>Recruiter</option>
+        <option>Talent Acquisition Specialist</option>
+        <option>Training Specialist</option>
+        <option>Employee Relations Specialist</option>
+        <option>HR Coordinator</option>
+        <option>Compensation Specialist</option>
+
+        <!-- Education -->
+        <option>School Teacher</option>
+        <option>Primary School Teacher</option>
+        <option>High School Teacher</option>
+        <option>College Teacher</option>
+        <option>University Lecturer</option>
+        <option>Professor</option>
+        <option>Tutor</option>
+        <option>Teaching Assistant</option>
+        <option>School Principal</option>
+        <option>Education Counselor</option>
+        <option>Academic Advisor</option>
+        <option>Special Education Teacher</option>
+        <option>Curriculum Specialist</option>
+        <option>School Administrator</option>
+        <option>Trainer</option>
+
+        <!-- Healthcare -->
+        <option>Doctor</option>
+        <option>General Physician</option>
+        <option>Surgeon</option>
+        <option>Dentist</option>
+        <option>Pharmacist</option>
+        <option>Nurse</option>
+        <option>Medical Assistant</option>
+        <option>Physiotherapist</option>
+        <option>Psychologist</option>
+        <option>Nutritionist</option>
+        <option>Medical Laboratory Technician</option>
+        <option>Radiology Technician</option>
+        <option>Healthcare Administrator</option>
+        <option>Veterinarian</option>
+        <option>Paramedic</option>
+        <option>Medical Receptionist</option>
+        <option>Medical Researcher</option>
+
+        <!-- Law & Legal -->
+        <option>Lawyer</option>
+        <option>Legal Advisor</option>
+        <option>Legal Assistant</option>
+        <option>Paralegal</option>
+        <option>Corporate Lawyer</option>
+        <option>Judge</option>
+        <option>Mediator</option>
+        <option>Compliance Officer</option>
+        <option>Legal Consultant</option>
+
+        <!-- Creative & Media -->
+        <option>Graphic Designer</option>
+        <option>Fashion Designer</option>
+        <option>Interior Designer</option>
+        <option>Photographer</option>
+        <option>Videographer</option>
+        <option>Video Editor</option>
+        <option>Film Director</option>
+        <option>Film Producer</option>
+        <option>Animator</option>
+        <option>Illustrator</option>
+        <option>Art Director</option>
+        <option>Copywriter</option>
+        <option>Writer</option>
+        <option>Editor</option>
+        <option>Journalist</option>
+        <option>News Reporter</option>
+        <option>Content Creator</option>
+        <option>Social Media Creator</option>
+        <option>Makeup Artist</option>
+        <option>Music Producer</option>
+        <option>Sound Engineer</option>
+        <option>Artist</option>
+
+        <!-- Hospitality & Tourism -->
+        <option>Hotel Manager</option>
+        <option>Restaurant Manager</option>
+        <option>Chef</option>
+        <option>Cook</option>
+        <option>Baker</option>
+        <option>Waiter</option>
+        <option>Barista</option>
+        <option>Receptionist</option>
+        <option>Front Desk Officer</option>
+        <option>Event Planner</option>
+        <option>Travel Agent</option>
+        <option>Tour Guide</option>
+        <option>Flight Attendant</option>
+        <option>Housekeeping Manager</option>
+        <option>Event Manager</option>
+
+        <!-- Retail & Customer Service -->
+        <option>Retail Manager</option>
+        <option>Retail Associate</option>
+        <option>Store Associate</option>
+        <option>Customer Service Representative</option>
+        <option>Call Center Representative</option>
+        <option>Customer Support Specialist</option>
+        <option>Sales Associate</option>
+        <option>Merchandiser</option>
+        <option>Inventory Associate</option>
+        <option>Customer Success Manager</option>
+        <option>Customer Care Executive</option>
+
+        <!-- Real Estate -->
+        <option>Real Estate Agent</option>
+        <option>Real Estate Manager</option>
+        <option>Property Manager</option>
+        <option>Real Estate Consultant</option>
+        <option>Property Consultant</option>
+        <option>Leasing Agent</option>
+        <option>Property Advisor</option>
+
+        <!-- Engineering -->
+        <option>Civil Engineer</option>
+        <option>Mechanical Engineer</option>
+        <option>Electrical Engineer</option>
+        <option>Chemical Engineer</option>
+        <option>Environmental Engineer</option>
+        <option>Industrial Engineer</option>
+        <option>Architect</option>
+        <option>Urban Planner</option>
+        <option>Quantity Surveyor</option>
+        <option>Structural Engineer</option>
+        <option>Petroleum Engineer</option>
+        <option>Aerospace Engineer</option>
+        <option>Automotive Engineer</option>
+        <option>Biomedical Engineer</option>
+
+        <!-- Construction & Skilled Trades -->
+        <option>Construction Manager</option>
+        <option>Construction Worker</option>
+        <option>Site Supervisor</option>
+        <option>Carpenter</option>
+        <option>Electrician</option>
+        <option>Plumber</option>
+        <option>Painter</option>
+        <option>Welder</option>
+        <option>Mason</option>
+        <option>Mechanic</option>
+        <option>Auto Technician</option>
+        <option>HVAC Technician</option>
+        <option>Machine Operator</option>
+        <option>Heavy Equipment Operator</option>
+        <option>Maintenance Technician</option>
+
+        <!-- Transportation & Logistics -->
+        <option>Driver</option>
+        <option>Truck Driver</option>
+        <option>Delivery Driver</option>
+        <option>Courier</option>
+        <option>Delivery Rider</option>
+        <option>Logistics Manager</option>
+        <option>Logistics Coordinator</option>
+        <option>Supply Chain Manager</option>
+        <option>Warehouse Manager</option>
+        <option>Warehouse Associate</option>
+        <option>Procurement Officer</option>
+        <option>Purchasing Manager</option>
+        <option>Fleet Manager</option>
+        <option>Shipping Coordinator</option>
+
+        <!-- Government & Public Service -->
+        <option>Government Officer</option>
+        <option>Civil Servant</option>
+        <option>Public Administrator</option>
+        <option>Police Officer</option>
+        <option>Firefighter</option>
+        <option>Military Officer</option>
+        <option>Social Worker</option>
+        <option>Community Worker</option>
+        <option>Diplomat</option>
+        <option>Government Administrator</option>
+
+        <!-- Science & Research -->
+        <option>Biologist</option>
+        <option>Chemist</option>
+        <option>Physicist</option>
+        <option>Geologist</option>
+        <option>Environmental Scientist</option>
+        <option>Research Scientist</option>
+        <option>Laboratory Assistant</option>
+        <option>Research Assistant</option>
+        <option>Marine Scientist</option>
+        <option>Astronomer</option>
+
+        <!-- Agriculture -->
+        <option>Farmer</option>
+        <option>Agricultural Officer</option>
+        <option>Agricultural Consultant</option>
+        <option>Horticulturist</option>
+        <option>Fisheries Officer</option>
+        <option>Forestry Officer</option>
+        <option>Farm Manager</option>
+        <option>Animal Breeder</option>
+
+        <!-- Sports & Fitness -->
+        <option>Personal Trainer</option>
+        <option>Fitness Trainer</option>
+        <option>Gym Manager</option>
+        <option>Sports Coach</option>
+        <option>Football Coach</option>
+        <option>Cricket Coach</option>
+        <option>Athletic Trainer</option>
+        <option>Sports Manager</option>
+        <option>Sports Instructor</option>
+        <option>Yoga Instructor</option>
+
+        <!-- Beauty & Wellness -->
+        <option>Hair Stylist</option>
+        <option>Barber</option>
+        <option>Beautician</option>
+        <option>Esthetician</option>
+        <option>Spa Therapist</option>
+        <option>Massage Therapist</option>
+        <option>Nail Technician</option>
+
+        <!-- Security -->
+        <option>Security Guard</option>
+        <option>Security Supervisor</option>
+        <option>Security Manager</option>
+        <option>Private Investigator</option>
+        <option>Loss Prevention Officer</option>
+
+        <!-- Personal & Care Services -->
+        <option>Caregiver</option>
+        <option>Childcare Worker</option>
+        <option>Housekeeper</option>
+        <option>Personal Assistant</option>
+        <option>Pet Care Specialist</option>
+        <option>Dog Trainer</option>
+        <option>Home Care Assistant</option>
+
+        <!-- Language & Communication -->
+        <option>Translator</option>
+        <option>Interpreter</option>
+        <option>Language Teacher</option>
+        <option>Proofreader</option>
+        <option>Technical Writer</option>
+        <option>Public Speaker</option>
+        <option>Communication Specialist</option>
+
+        <!-- Other -->
+        <option>Freelancer</option>
+        <option>Entrepreneur</option>
+        <option>Consultant</option>
+        <option>Document Controller</option>
+        <option>Data Entry Clerk</option>
+        <option>Office Clerk</option>
+        <option>Secretary</option>
+        <option>Receptionist</option>
+        <option>Other</option>
+
+    </select>
+
+</div>
 
                     <!-- SALARY -->
                     <div>
