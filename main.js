@@ -18,14 +18,13 @@ app.set('views', path.join(__dirname, 'views'));
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const JWT = '123erwvdghlkyrtadeg##########jfrge478945645';
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 const { upload } = require('./config/multerconfig');
 const { uploadResume } = require('./config/resumeconfig');
 
 // 
-// Connection helper
+// Keep your clean connection helper
 let isConnected = false;
-
 const connectDB = async () => {
   if (isConnected || mongoose.connection.readyState === 1) {
     isConnected = true;
@@ -39,15 +38,6 @@ const connectDB = async () => {
     throw error;
   }
 };
-// Middleware to ensure DB is connected on every serverless invocation
-app.use(async (req, res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (err) {
-    res.status(500).send('Database connection failed');
-  }
-});
 app.get('/', isLoggined, onlyUser, async (req, res) => {
     try {
 
@@ -670,10 +660,10 @@ async function isLoggined(req, res, next) {
         res.redirect('/login');
     }
 }
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
   });
-}
-
-module.exports = app;
+}).catch(err => {
+  console.error("Failed to connect to database, server not started", err);
+});
